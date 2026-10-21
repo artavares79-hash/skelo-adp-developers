@@ -1,0 +1,31 @@
+name: "Documentation feedback"
+description: "Suggest an improvement or report an unclear public ADP documentation passage."
+title: "[Docs] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve SKELO ADP documentation.
+
+        Please keep this report public and non-sensitive. **Do not disclose security vulnerabilities here**; use the private reporting process described in SECURITY.md.
+  - type: input
+    id: page
+    attributes:
+      label: Page or section
+      description: Which document or section needs improvement?
+      placeholder: "README.md — How ADP works"
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is unclear or incorrect?
+      description: Explain the issue without sharing private production information.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Suggested improvement (optional)
+    validations:
+      required: false
