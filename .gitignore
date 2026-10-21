@@ -1,0 +1,10 @@
+﻿# Documentation repository only
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+*.sqlite*
+*.db
+__pycache__/
