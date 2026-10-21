@@ -89,6 +89,10 @@ MCP allows an authorized compatible client to discover and invoke the ADP tools 
 
 ## Interested in evaluating ADP?
 
+**Interested in testing ADP with your own agents?** [Request a controlled evaluation on GitHub](https://github.com/artavares79-hash/skelo-adp-developers/issues/new?template=integration-interest.yml) or consult the [official integration information](https://iamskelo.com/adp/connect.html).
+
+GitHub requests are visible to other users after the repository is published. Do not include confidential information, tokens, personal contact data or private endpoints. Requests are reviewed individually; no automatic access or response time is promised.
+
 1. Start with the [plain-language walkthrough](https://iamskelo.com/adp/) and [synthetic examples](docs/examples.md).
 2. Read [Getting started](docs/getting-started.md), the [MCP integration overview](docs/mcp-integration.md), and the [security notes](SECURITY.md).
 3. Review the [official integration information](https://iamskelo.com/adp/connect.html) for the currently available contact/access route.
