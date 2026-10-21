@@ -8,6 +8,10 @@ The agreement-and-verification workflow has been implemented and internally vali
 
 There is **no public self-service access**. Connection requires authorization, and supported capabilities depend on the session and the connection details supplied after approval. Compatibility with an arbitrary client is not promised.
 
+## How do I express interest in an external evaluation?
+
+When the repository is public, [open an evaluation request](https://github.com/artavares79-hash/skelo-adp-developers/issues/new?template=integration-interest.yml) using synthetic, non-confidential use-case details. You may also review [SKELO's official integration information](https://iamskelo.com/adp/connect.html). Requests do not guarantee immediate approval or a specific response time.
+
 ## Where are the public API keys and test endpoint?
 
 They are not provided here. A public self-service sandbox has **not** been enabled. Review the [official integration information](https://iamskelo.com/adp/connect.html) for the current access process.
