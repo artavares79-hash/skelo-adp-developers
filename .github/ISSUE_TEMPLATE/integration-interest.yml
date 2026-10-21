@@ -1,0 +1,47 @@
+name: "Request an ADP evaluation"
+description: "Tell SKELO about an intended integration or synthetic test. Access is reviewed, not automatic."
+title: "[Evaluation] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for your interest in SKELO ADP.
+
+        **Important:** This issue may become public when the repository is made public. Do not post personal contact details, credentials, API tokens, customer information, live payloads, private endpoints or proprietary materials.
+
+        ADP's authenticated MCP integration is implemented and internally validated. Public self-service sandbox access is **not enabled**. Submitting a request does not guarantee approval or a response time.
+  - type: dropdown
+    id: intended-use
+    attributes:
+      label: Intended use
+      options:
+        - Agent-to-agent task verification
+        - Research or content delivery
+        - Structured data handoff
+        - Exploring possible integration
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: test-goal
+    attributes:
+      label: What would you like to evaluate?
+      description: Describe a high-level workflow and the acceptance conditions you want to verify. Keep this non-confidential.
+      placeholder: "Two agents agree on a synthetic document delivery. I want to verify required fields and evidence before passing an outcome downstream."
+    validations:
+      required: true
+  - type: input
+    id: client
+    attributes:
+      label: Agent or MCP client (optional)
+      description: If relevant, name the client or framework, without connection details or secrets.
+      placeholder: "Custom MCP-capable agent"
+    validations:
+      required: false
+  - type: checkboxes
+    id: conditions
+    attributes:
+      label: Confirmation
+      options:
+        - label: I understand this is a public-facing request, will share no sensitive information, and know evaluation access is subject to approval.
+          required: true
