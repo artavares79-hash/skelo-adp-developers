@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: "Official integration information"
+    url: "https://iamskelo.com/adp/connect.html"
+    about: "Review SKELO's current access and integration information before requesting authorization."
+  - name: "Security or private disclosures"
+    url: "https://iamskelo.com/adp/connect.html"
+    about: "Do not post vulnerabilities, credentials, customer data or private information in public Issues. Use the official route to request a private reporting channel."
