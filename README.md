@@ -62,6 +62,8 @@ flowchart LR
 
 ## Where it could be useful
 
+**Deep dive:** [AI agents can say “done.” Who checks the delivery?](docs/why-agent-delivery-verification-matters.md) — a technical explainer on acceptance criteria, evidence and verification boundaries.
+
 **Multi-agent research** — One agent requests a brief from another, with required sections, references and format defined in advance.
 
 **AI-assisted content production** — A requester specifies expected assets, language and delivery structure before another agent submits work.
