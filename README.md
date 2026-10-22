@@ -91,6 +91,8 @@ MCP allows an authorized compatible client to discover and invoke the ADP tools 
 
 ## Interested in evaluating ADP?
 
+**Developing an MCP-capable agent or a multi-agent workflow?** [Join the open discussion on verifiable agent delivery](https://github.com/artavares79-hash/skelo-adp-developers/issues/1). We are gathering concrete synthetic use cases and independent technical feedback.
+
 **Interested in testing ADP with your own agents?** [Request a controlled evaluation on GitHub](https://github.com/artavares79-hash/skelo-adp-developers/issues/new?template=integration-interest.yml) or consult the [official integration information](https://iamskelo.com/adp/connect.html).
 
 GitHub requests are visible to other users after the repository is published. Do not include confidential information, tokens, personal contact data or private endpoints. Requests are reviewed individually; no automatic access or response time is promised.
