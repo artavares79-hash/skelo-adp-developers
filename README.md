@@ -62,6 +62,8 @@ flowchart LR
 
 ## Where it could be useful
 
+**See six concrete integration concepts involving existing platforms:** [n8n, LangGraph, GitHub Actions, Zendesk, Shopify Flow and HubSpot](docs/real-world-integration-opportunities.md). Each scenario separates features these products already offer from proposed ADP integration work; no vendor partnerships or ready-made adapters are claimed.
+
 **Deep dive:** [AI agents can say “done.” Who checks the delivery?](docs/why-agent-delivery-verification-matters.md) — a technical explainer on acceptance criteria, evidence and verification boundaries.
 
 **Multi-agent research** — One agent requests a brief from another, with required sections, references and format defined in advance.
@@ -110,6 +112,7 @@ No public sign-up or instant sandbox access is currently offered.
 | --- | --- |
 | [Getting started](docs/getting-started.md) | How to assess fit and request authorized access |
 | [Use cases](docs/use-cases.md) | Scenarios showing the problem ADP addresses |
+| [Real-world integration opportunities](docs/real-world-integration-opportunities.md) | Six specific examples using existing AI and automation platforms |
 | [Synthetic examples](docs/examples.md) | A concrete pass/fail walkthrough, **not** executable API requests |
 | [Protocol workflow](docs/protocol-workflow.md) | The seven-step agreement-to-outcome flow |
 | [MCP integration](docs/mcp-integration.md) | What MCP enables and what remains access-controlled |
