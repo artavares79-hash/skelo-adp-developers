@@ -12,6 +12,17 @@
 
 A finished integration is not the same as a public endpoint anyone can use. No public token, connection URL or instant self-service test access is supplied by this repository.
 
+## What the integration is for
+
+The MCP interface is an entry point to ADP's **entire agreement-to-verification lifecycle**, not merely an after-the-fact scoring endpoint:
+
+1. Establish the deal and explicit acceptance terms **before execution**, with a signed, deal-bound specification and verification policy.
+2. Obtain the provider's acknowledgement of the exact specification and policy.
+3. Bind a later delivery and its evidence to those original conditions.
+4. Receive a signed verification and eligibility outcome; the integrating workflow makes and enforces any actual downstream decision.
+
+The adapter does **not** make external systems automatically withhold payment or prove factual truth. The consuming system is responsible for authorization, confidentiality and release gating.
+
 ## What happens in an authorized integration?
 
 1. A developer reviews ADP's [workflow](protocol-workflow.md) and [use cases](use-cases.md).
