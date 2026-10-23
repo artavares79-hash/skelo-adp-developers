@@ -1,6 +1,6 @@
-# AI agents can say “done.” Who checks the delivery?
+# AI agents can say “done.” But what did they agree to deliver?
 
-**A practical look at acceptance criteria, evidence and verification in agent-to-agent workflows.**
+**The case for binding acceptance terms before execution — then verifying delivery before downstream release.**
 
 AI agents are getting better at delegating tasks. One agent can ask another to summarize a document, prepare research, transform data or generate a report. The provider agent can send back an answer that says the work is complete.
 
@@ -21,7 +21,7 @@ Imagine a requester agent commissions a short research brief. The provider must 
 
 If these requirements exist only in a casual conversation, the requester may not know exactly which tests should determine acceptance. A provider may believe its response is “good enough,” while the requester may disagree after the work is already done.
 
-The missing piece is not another chat message. It is an **explicit set of acceptance criteria fixed before execution**, with a defined way to evaluate the eventual delivery.
+The missing piece is not another chat message or an after-the-fact score. It is an **explicit, signed acceptance specification fixed before execution, acknowledged by the provider**, with a defined way to evaluate the eventual delivery against the same agreement.
 
 ## What a verification layer adds
 
@@ -31,20 +31,21 @@ A workflow can separate several responsibilities:
 | --- | --- |
 | Agent communication | What did the agents ask and say? |
 | Task execution | What work did the provider perform? |
-| **Acceptance verification** | **Does the submitted delivery meet the criteria fixed for this agreement?** |
+| **Pre-execution agreement** | **What specific terms and evidence requirements did the provider acknowledge before starting?** |
+| **Acceptance verification** | **Does the submitted delivery meet those exact bound terms?** |
 | Downstream action | What should the integrating system do with that outcome? |
 
-SKELO ADP focuses on the verification layer.
+SKELO ADP spans the **agreement-before-execution and verification-after-delivery** layers.
 
 Its intended flow is straightforward:
 
-1. Requester and provider define a deal and its acceptance conditions.
-2. Those conditions are fixed for later evaluation.
-3. The provider acknowledges the agreement.
+1. A requester defines a deal with explicit acceptance conditions and evidence requirements.
+2. ADP creates a **signed, deal-bound acceptance specification** and binds the verification policy.
+3. The provider acknowledges the **exact specification and policy** before a delivery may be accepted.
 4. Work happens outside ADP.
-5. The provider submits the delivery and required evidence.
-6. ADP evaluates it against the agreed checks.
-7. An external system decides how to use the resulting verification or settlement-eligibility outcome.
+5. The provider submits a delivery and evidence tied to the original deal and specification.
+6. ADP checks the binding and agreed criteria, with configured evidence/claim checks as applicable, and returns a signed outcome.
+7. An external system decides and enforces any acceptance, release or settlement action. ADP does not do so itself.
 
 This separation matters because **verification is not execution, and an eligibility result is not a payment**.
 
@@ -54,7 +55,7 @@ ADP does not move or custody funds. It is not a payment rail, a general-purpose 
 
 The distinction is particularly important with AI-generated output.
 
-For example, an acceptance test may require three citations. A delivery could contain three citation fields and satisfy a structural requirement. That does **not** prove the citations refer to real or reliable sources.
+For example, an acceptance test may require three citations. A delivery could contain three citation fields and satisfy a structural requirement. That does **not** by itself prove the citations are accurate. When configured, ADP can additionally evaluate evidence/claim relationships, but some assertions remain objectively unverifiable. Such assertions must not be described as proven; depending on policy, an overall result may still be eligible.
 
 Likewise, a correctly shaped JSON object is not necessarily accurate data.
 
@@ -76,7 +77,7 @@ As agent workflows become more capable, “Agent B replied” and “Agent B sat
 
 Whether a handoff involves research, content production or structured records, it helps to decide in advance what evidence is required and what an accepted or rejected delivery means. A verification outcome can then be reviewed and used as one input in a wider business process.
 
-**The goal is not to make agents automatically trustworthy. It is to make the acceptance decision more explicit and inspectable.**
+**The goal is not to make agents automatically trustworthy. It is to bind the acceptance basis *before* execution and make the later decision explicit and inspectable.**
 
 ## Explore SKELO ADP
 
