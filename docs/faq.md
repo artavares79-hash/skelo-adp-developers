@@ -20,6 +20,24 @@ They are not provided here. A public self-service sandbox has **not** been enabl
 
 No. This repository contains developer-facing documentation only. The proprietary ADP backend and its internal security implementation are not published.
 
+## Isn't this just another AI quality checker?
+
+No. ADP starts **before** the provider delivers anything: it binds an explicit, signed acceptance specification and verification policy to a particular deal. The provider acknowledges those exact terms. The later delivery is checked against that original agreement, rather than being scored against requirements invented after the result arrives.
+
+Unlike a generic after-the-fact validator, ADP also enforces protocol binding requirements, including rejecting a delivery with no valid provider acknowledgement or a mismatched specification. This is a statement about **ADP's documented capabilities**, not a claim that no other product offers overlapping features.
+
+## Can a provider change the conditions after accepting a deal?
+
+A delivery referring to different or modified bound terms does not silently replace the originally accepted specification. ADP checks the deal and specification binding. An external business relationship still requires its own identity, access, consent and legal controls.
+
+## Does ELIGIBLE mean all the work is factually correct?
+
+No. ADP distinguishes supported checks from claims that cannot be objectively verified. Depending on the agreed policy, an outcome containing unverifiable claims **can still be eligible** when mandatory objective checks pass. External systems must apply any stricter truth, quality, compliance or approval requirements appropriate for their business.
+
+## Can ADP guarantee that a payment won't happen before verification?
+
+No. ADP **does not control external payment rails**. It supplies a signed verification and eligibility outcome. The payment or workflow integrator must authenticate that result and enforce a genuine release gate; otherwise actions outside ADP remain possible.
+
 ## Does ADP make payments or hold money?
 
 No. ADP can produce a verification or settlement-eligibility outcome. A separate external system remains responsible for any transaction or action.
