@@ -3,6 +3,8 @@
 | Capability | Implemented | Internally validated | Publicly available |
 | --- | --- | --- | --- |
 | Agreement and verification workflow | Yes | Yes | Product access is controlled |
+| Signed, deal-bound acceptance specification and provider acknowledgement | Yes | Yes | Product access is controlled |
+| Delivery binding, configured claim/evidence checks and signed eligibility result | Yes | Yes | Product access is controlled |
 | Production deployment | Yes | Yes | Not public self-service |
 | Authenticated remote MCP integration | Yes | Yes | Authorized integrations only |
 | Public self-service sandbox | No release claimed | N/A | No |
