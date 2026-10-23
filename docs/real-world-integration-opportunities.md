@@ -1,30 +1,37 @@
 # Where SKELO ADP could fit in existing AI workflows
 
-**Real platforms already automate tasks. SKELO ADP could add an explicit agreement-and-verification step between delivery and a downstream decision.**
+**Real platforms already automate tasks. SKELO ADP could bind a signed, deal-specific acceptance agreement *before* an agent performs work, require the provider to acknowledge it, and verify the later delivery against those same frozen terms *before* a downstream decision.**
 
 The examples below reference documented products that exist today. They are **proposed integration designs**, not implemented, certified or tested integrations with those vendors. SKELO has not announced partnerships with them. **No public self-service ADP MCP sandbox is available**; external integration requires authorization and may require a custom connector.
 
 ## The pattern in one picture
 
 ```text
-Existing platform / agent orchestration
-    |
-    v
-Task requested -> criteria agreed -> agent performs work
-                                          |
-                                          v
-                                  output + evidence
-                                          |
-                                          v
-                        SKELO ADP: verify agreed conditions
-                                          |
-                               outcome / eligibility
-                                          |
-                                          v
-                 existing system decides its next action
+Existing platform commissions a task
+                |
+                v
+ADP: signed acceptance spec + deal-bound policy
+                |
+                v
+Provider acknowledges the exact bound terms
+                |
+                v
+Agent does the work OUTSIDE ADP
+                |
+                v
+Delivery + evidence must match original agreement
+                |
+                v
+ADP: verify agreed conditions -> signed outcome / eligibility
+                |
+                v
+External workflow authenticates the outcome
+and decides whether to accept, release or ask for correction
 ```
 
-*ADP does not execute tasks, independently establish arbitrary factual truth or transfer money.*
+**Why this is different from adding a validator afterward:** The provider cannot silently substitute a looser specification after submitting an incomplete delivery, and the requester cannot quietly make up stricter terms after the result arrives. The acceptance basis is established in advance.
+
+**Integration boundary:** ADP does not execute tasks, independently prove arbitrary factual truth or transfer money. An external release or payment must be actively gated by the integrating system; ADP cannot prevent actions that bypass the gate.
 
 ## Six practical opportunities
 
@@ -34,7 +41,7 @@ Task requested -> criteria agreed -> agent performs work
 
 **Example:** An automation delegates a competitor research brief to an AI agent. The agreement calls for four specified sections, required fields and attached source references.
 
-**Where ADP could fit:** Before an n8n workflow emails the brief or proceeds to another business step, an authorized integration could submit the delivery and evidence to ADP for verification against criteria agreed earlier.
+**Where ADP could fit:** An authorized n8n integration could **first create a deal-bound acceptance specification and obtain the research provider's acknowledgement**. After execution, it could send the tied delivery and evidence for verification *before* any approval or downstream handoff.
 
 **Implementation work needed:** Configure an authorized MCP connection and the workflow's deal lifecycle, payload mapping, authentication and result-handling steps. Availability of individual ADP tools must be established in the authorized environment.
 
@@ -46,7 +53,7 @@ Task requested -> criteria agreed -> agent performs work
 
 **Example:** A coordinator delegates a data analysis step to a specialist agent and requires a specified output schema, a summary and an evidence bundle.
 
-**Where ADP could fit:** The coordinator could establish acceptance criteria at delegation time and request an ADP outcome when the specialist submits its result.
+**Where ADP could fit:** The coordinator could **bind the specialist's exact deliverables and verification policy at delegation time** and require acknowledgement. When the specialist submits its result, ADP could evaluate it against those unchanged conditions.
 
 **Implementation work needed:** Build a bridge between LangGraph's state/tool workflow and the authorized ADP interface, including state persistence and decisions for rejected deliveries.
 
@@ -58,7 +65,7 @@ Task requested -> criteria agreed -> agent performs work
 
 **Example:** A coding agent promises to change an API endpoint while keeping test results, a changelog entry and deployment notes in the delivered package.
 
-**Where ADP could fit:** An independently written bridge could establish agreed deliverables, attach build/test artifacts, and use an ADP verification outcome as **one input** to an existing pull-request review and check workflow.
+**Where ADP could fit:** A bridge could **bind the agreed deliverables and test-evidence requirements before the coding agent starts**, obtain acknowledgement, attach authorized build/test artifacts later and use ADP eligibility as **one input** to existing pull-request checks.
 
 **Implementation work needed:** Build and permission a GitHub integration; bind the right commit to the delivery; validate evidence and configure branch protection/required checks as appropriate.
 
@@ -70,7 +77,7 @@ Task requested -> criteria agreed -> agent performs work
 
 **Example:** A support agent requests an internal fulfillment action and expects a structured confirmation with an order reference and a proof-of-completion field.
 
-**Where ADP could fit:** The action's agreed evidence could be verified before the business workflow marks the requested operation as completed.
+**Where ADP could fit:** A secure adapter could **bind the requested action and required proof before delegation**, obtain the responsible provider's acknowledgement and verify the returned evidence against that original agreement before another business step proceeds.
 
 **Implementation work needed:** A separately developed and authorized integration with Zendesk's action or API mechanisms plus ADP; careful handling of customer privacy and existing permissions.
 
@@ -82,7 +89,7 @@ Task requested -> criteria agreed -> agent performs work
 
 **Example:** An external agent is asked to produce structured product metadata for 20 synthetic products, each with required language, fields and approved formatting.
 
-**Where ADP could fit:** A connector could evaluate delivery completeness against fixed acceptance criteria before the merchant's existing publication process proceeds.
+**Where ADP could fit:** A connector could **freeze the required catalog-data specification before commissioning the agent**, obtain acknowledgement and evaluate the delivered package against the bound criteria before the merchant's publication workflow proceeds.
 
 **Implementation work needed:** An authorized adapter and appropriate Shopify/API/Flow permissions and plan capabilities.
 
@@ -94,7 +101,7 @@ Task requested -> criteria agreed -> agent performs work
 
 **Example:** A marketing agent prepares a lead-enrichment package or campaign brief with agreed fields, source references and language requirements.
 
-**Where ADP could fit:** A workflow-specific adapter could obtain a verification outcome for the deliverable before updating records or initiating a later action.
+**Where ADP could fit:** A workflow-specific adapter could **bind the expected lead-enrichment or briefing requirements in advance**, require provider acknowledgement and obtain a delivery-specific verification outcome before updating records or initiating a later action.
 
 **Implementation work needed:** Custom code or an approved integration, API permission checks, secure data handling and ADP onboarding.
 
@@ -107,11 +114,11 @@ Task requested -> criteria agreed -> agent performs work
 A credible pilot should **not** claim full vendor integration on day one. Start with a synthetic handoff:
 
 1. Pick **one** existing orchestrator (for example, an n8n flow or a LangGraph demo).
-2. Define a fixed synthetic task and its acceptance criteria.
-3. Complete the task in the existing tool, outside ADP.
-4. Send permitted delivery information and evidence through an **authorized** ADP integration.
-5. Inspect successful and unsuccessful verification outcomes.
-6. Only then decide whether a production adapter is warranted.
+2. Before work, create an authorized **signed, deal-bound acceptance specification and policy** for a fixed synthetic task.
+3. Have the provider acknowledge the **exact** bound conditions; test that a missing acknowledgement is rejected.
+4. Complete the task in the existing tool, outside ADP, and submit a delivery tied to the **original** specification.
+5. Test successful and failed criteria, and a submission referencing **different** terms. Distinguish supported evidence checks from unverifiable claims.
+6. Measure whether the **external workflow** correctly enforces an authorization/release gate; only then consider a production adapter.
 
 No vendor partnership, certification, instant setup or automatic payment is claimed here.
 
@@ -124,7 +131,8 @@ No vendor partnership, certification, instant setup or automatic payment is clai
 | E-commerce | Catalog agent -> store workflow | Product field structure, required assets, delivery completeness |
 | Customer support | Support action agent -> operations | Presence of agreed reference fields and action evidence |
 | Research / analytics | Research agent -> requester | Required sections, sources provided, schema and file structure |
-| Enterprise operations | Process agent -> approver | Required documents and evidence fields before an approval decision |
+| Enterprise operations | Process agent -> approver | Pre-agreed required documents and evidence before an approval decision |
+| Insurance (illustrative) | External claims-document service -> insurer | Pre-agreed package format, evidence and provider acknowledgement; claims decision remains with insurer |
 
 **Important:** Checkability depends on the actual agreement and the verification capabilities configured in the authorized ADP environment. Presence of a field or reference is not equivalent to independent verification of its underlying truth.
 
