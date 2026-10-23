@@ -1,13 +1,13 @@
 # SKELO ADP
 ### Agent Deal Protocol
 
-**Clear terms. Evidence-backed delivery. Verifiable outcomes.**
+**Agree before execution. Freeze the terms. Verify before release.**
 
-AI agents can message each other. They can delegate tasks. They can trigger payments. But **who determines whether the promised work was actually delivered as agreed?**
+An AI agent can promise a result, report “done” and even trigger a downstream action. But who establishes **what counts as an acceptable delivery before the work starts** — and prevents the goalposts from changing afterward?
 
-SKELO ADP focuses on that missing decision: a structured agreement-and-verification workflow between autonomous agents.
+**SKELO Agent Deal Protocol (ADP)** is a pre-execution agreement and verification layer for autonomous-agent handoffs. It creates a signed, deal-bound acceptance specification; binds the provider's acknowledgement to the exact specification **and** verification policy; evaluates the later delivery and evidence against those frozen terms; and returns a settlement-eligibility outcome for an external system to use.
 
-> **The idea:** Define what “done” means *before* work starts. Submit a delivery with the agreed evidence. Evaluate it against the terms that were fixed at the start.
+> **The distinction:** ADP is **not merely a check added after the result arrives**. Its agreement, acceptance criteria and provider commitment are bound **before** the delivery is accepted. A mismatch between the agreed specification and the submitted delivery is not silently accepted.
 
 **Current status:** Agreement and verification workflow implemented · Production deployment in place · Authenticated remote MCP integration implemented and internally validated · **Access by approval only**
 
@@ -15,48 +15,48 @@ SKELO ADP focuses on that missing decision: a structured agreement-and-verificat
 
 ---
 
-## The problem: “Done” is not the same as “accepted”
+## The problem: acceptance cannot be defined after delivery
 
-Imagine two AI agents:
+Imagine a requester agent commissioning a research brief from a provider agent.
 
-- **Requester:** “Write a short research brief with three sections and cited sources.”
-- **Provider:** “Done — here is the brief.”
+- **Before work:** The requester specifies three required sections, an output language, evidence requirements and objective acceptance checks. ADP binds the deal to a signed acceptance specification and a defined verification policy. The provider acknowledges those exact terms.
+- **During work:** The provider produces the brief outside ADP.
+- **At delivery:** The submitted result is matched to the original deal and frozen specification. ADP checks the agreed requirements and evidence, then returns a signed verification outcome.
+- **After verification:** The integrating workflow decides whether to accept, request correction, or authorize an external follow-up action. ADP does not execute or force that action.
 
-The response arrived. But were all three sections present? Were the requested citations supplied? Was the agreed format followed?
-
-Without shared acceptance criteria, the requester is left to interpret what “done” means *after* delivery.
-
-**ADP makes the acceptance terms explicit before execution and provides a defined verification outcome afterward.** It does not promise to determine universal factual truth or guarantee work quality beyond the checks agreed for a particular deal.
+**Why this matters:** Neither side should be able to silently substitute new acceptance rules when the result is already on the table. ADP makes the agreed basis for the decision explicit, linked to the particular deal and inspectable.
 
 ## Where ADP fits
 
-| Layer | What it answers |
+| Layer | Its role |
 | --- | --- |
-| Agent communication | “What did the agents say?” |
-| **SKELO ADP** | **“Did this delivery satisfy the previously agreed checks?”** |
-| Payment or downstream workflow | “What action should happen next?” |
+| Agent communication / orchestration | Agents discover each other, delegate and execute work |
+| **ADP: before execution** | **Bind deal, signed acceptance specification, verification policy and provider acknowledgement** |
+| **ADP: at delivery** | **Match the delivery to the original terms; evaluate criteria and configured claim/evidence checks** |
+| **ADP: after verification** | **Produce a verification and settlement-eligibility outcome** |
+| External workflow / payment system | Validate and enforce its own acceptance, release or payment action |
 
-ADP is **not** a payment processor, escrow service, autonomous worker, or general-purpose truth oracle. It does not hold funds or initiate transfers. An external system decides whether and how to use its verification result.
+ADP is **not** a payment rail, escrow provider, identity authority, autonomous worker or general-purpose truth oracle. A workflow must explicitly use the ADP outcome to enforce a release gate; ADP cannot block an external action that bypasses this integration. Eligibility is **not** proof that every underlying factual claim is true.
 
 ## From agreement to outcome
 
 ~~~mermaid
 flowchart LR
-  A["Requester and provider<br/>define the deal"] --> B["Fix acceptance<br/>criteria"]
-  B --> C["Provider<br/>acknowledges"]
-  C --> D["Work happens<br/>outside ADP"]
-  D --> E["Delivery +<br/>evidence"]
-  E --> F["ADP evaluates against<br/>agreed criteria"]
-  F --> G["Verification outcome"]
-  G --> H["External system decides<br/>what happens next"]
+  A["Deal + explicit acceptance checks"] --> B["Signed spec + policy bound before work"]
+  B --> C["Provider ACK: exact spec + policy"]
+  C --> D["Work executed outside ADP"]
+  D --> E["Delivery tied to original terms + evidence"]
+  E --> F["Verification + signed outcome"]
+  F --> G["Eligibility decision"]
+  G --> H["External system chooses and enforces any action"]
 ~~~
 
-1. **Agree:** Define the deliverable and explicit acceptance criteria.
-2. **Fix the terms:** Establish the checks before execution, rather than changing them after delivery.
-3. **Acknowledge:** The provider accepts the agreed terms.
-4. **Deliver:** The provider performs the work externally and supplies delivery claims and evidence.
-5. **Verify:** ADP evaluates the submission against the fixed criteria.
-6. **Decide:** A separate integration may use the outcome to inform its own workflow.
+1. **Agree first:** Specify a deal, explicit acceptance criteria, verification policy and required evidence before the work begins.
+2. **Freeze and acknowledge:** ADP signs and binds the acceptance specification and policy to the deal. The provider acknowledges those exact terms; a delivery without a valid acknowledgement is rejected.
+3. **Execute externally:** The provider performs the task outside ADP.
+4. **Deliver against the original deal:** The submission must identify the expected frozen specification; mismatches are rejected.
+5. **Verify:** ADP applies the established structural and, when configured, claim/evidence checks; it also distinguishes outcomes that cannot be objectively verified.
+6. **Return eligibility:** ADP issues a signed verification result and eligibility outcome. **The integrating system** remains responsible for any release, settlement or payment decision.
 
 [See the complete workflow](docs/protocol-workflow.md) · [Walk through synthetic examples](docs/examples.md)
 
@@ -129,4 +129,4 @@ This is the **documentation home** for SKELO ADP. The ADP backend and security i
 
 ---
 
-**SKELO ADP — Define the deal. Check the delivery. Keep the decision explicit.**
+**SKELO ADP — Agree first. Freeze the terms. Verify before release.**
