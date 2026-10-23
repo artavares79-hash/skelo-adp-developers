@@ -1,47 +1,61 @@
-# Where ADP can fit
+# Where SKELO ADP can fit
 
-**ADP is designed for one specific question:** did a submitted delivery meet the explicit criteria agreed before the work began?
+**The value is in the full lifecycle:** agree objective acceptance criteria **before execution**, bind the agreement to the deal, obtain the provider's acknowledgement, and verify the later delivery against those same terms **before a downstream system releases or accepts the result**.
 
-The scenarios below are illustrative. They do **not** imply existing production partnerships, public access, automated fact-checking, or guaranteed quality.
+The scenarios below are proposed integrations, **not existing customers, vendor partnerships or publicly accessible APIs**. ADP does not guarantee factual truth, subjective quality, identity, legal compliance or automatic payment.
 
-## 1. A research agent commissions another agent
+## 1. Agent-to-agent research services
 
-**Request:** Produce a concise, three-section market briefing with references and a specified language.
+**Before work:** A researcher agent accepts a specific deal requiring three named sections, a language and source-related evidence requirements. ADP binds the signed acceptance specification and verification policy; the provider acknowledges those precise terms.
 
-**Acceptance criteria:** Three required sections; citations supplied; required language and delivery structure.
+**At delivery:** The result must match the original deal and specification. ADP checks the objective conditions and configured claim/evidence requirements and produces a verification outcome.
 
-**Evidence:** The submitted briefing and its reference fields.
+**Value to evaluate:** Reduce disagreements about what was commissioned and prevent a workflow from treating a merely completed task as an accepted delivery.
 
-**ADP's role:** Evaluate the delivery against the agreed checks. A downstream requester decides how to use the outcome.
+**Boundary:** A valid citation or evidence link does not automatically make the analysis factual.
 
-**Important limitation:** The presence of references does not prove they are correct. Independent source validation needs its own checks.
+## 2. AI content and creative-service handoffs
 
-## 2. Structured content handoff
+**Before work:** A commissioning agent and provider agree on count, structure, file references and supported objective criteria before drafting begins.
 
-**Request:** A writing agent asks another agent for a product description in a prescribed structure.
+**At delivery:** ADP evaluates whether the bound requirements are satisfied; the application decides if an editor should review or approve the assets.
 
-**Acceptance criteria:** Required sections, fields and language, set before drafting.
+**Value to evaluate:** Reduce renegotiation after delivery, missing-asset rework and unplanned approval steps.
 
-**Evidence:** Structured delivery with the requested content.
+**Boundary:** ADP does not itself judge creative merit, ownership or legal rights.
 
-**ADP's role:** Apply the configured acceptance criteria to the submitted material.
+## 3. Structured datasets and API-service deliverables
 
-**Important limitation:** Subjective quality, originality and rights clearance cannot be assumed from structural checks.
+**Before work:** A purchasing agent fixes the requested records, fields, required evidence and objective acceptance checks. The provider acknowledges the deal-bound agreement.
 
-## 3. Data package delivery
+**At delivery:** ADP evaluates submitted records and specified evidence checks against the frozen agreement; a consuming system may use the result before importing or purchasing the dataset.
 
-**Request:** One service asks an agent to deliver a defined set of machine-readable records.
+**Value to evaluate:** Establish a consistent handoff contract even when requester and provider use different agent frameworks.
 
-**Acceptance criteria:** Specific required fields, expected shape and evidence, within whatever checks the agreement supports.
+**Boundary:** Correct structure alone does not mean accurate source data.
 
-**Evidence:** A submitted package and supporting claims.
+## 4. Insurance: external adjuster or document-processing service
 
-**ADP's role:** Provide an explicit verification outcome for the agreed delivery requirements.
+**Before work:** An insurer's workflow commissions a *synthetic* claims-document package from an authorized external service. The accepted format, required records, evidence and reviewer requirements are fixed and acknowledged.
 
-**Important limitation:** Correctly shaped data is not necessarily true or complete. The integrator remains responsible for validating the sources and applying business safeguards.
+**At delivery:** ADP checks the bound submission; the insurer's own claims platform decides whether to route it to a human, request missing material or take another authorized step.
 
-## What ADP is not
+**Value to evaluate:** Reduce disputes about the commissioned package and repeated manual checks between different suppliers. The benefit must be benchmarked against the insurer's existing controls.
 
-ADP does not carry out the work itself, move money, custody funds, control payment rails, or certify universal factual truth. It is an agreement-and-verification layer, not a substitute for an integrator's security, compliance, identity or quality controls.
+**Boundary:** ADP does **not** determine coverage, fraud, legal entitlement or a payout. Insurance identity, privacy, regulation and claims decisions require separate controls and, where appropriate, qualified people.
 
-[Protocol workflow](protocol-workflow.md) · [Synthetic examples](examples.md) · [MCP integration](mcp-integration.md)
+## 5. Software delivery between agents
+
+**Before work:** A requester agrees on specific artifacts and evidence of tests. The provider acknowledges a signed specification.
+
+**At delivery:** A connector supplies authorized artifact/test evidence to ADP, which evaluates the supported checks against the frozen agreement. A code-hosting system may use the outcome as one step of a protected release process.
+
+**Value to evaluate:** Retain the original task-level acceptance basis across autonomous agent handoffs.
+
+**Boundary:** ADP does not replace CI, code review, security scanning or provenance validation.
+
+## For a credible pilot
+
+Compare a workflow **with and without** the ADP agreement-to-eligibility step. Measure missing deliveries, disputed acceptance, verification error rates, integration effort, latency and whether downstream actions were actually prevented when acceptance conditions failed.
+
+[Real-world platform integration ideas](real-world-integration-opportunities.md) · [Protocol workflow](protocol-workflow.md) · [Synthetic examples](examples.md)
