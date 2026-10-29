@@ -1,0 +1,2301 @@
+{
+ "dealRecordCases": [
+  {
+   "description": "existing AP2/x402 record layout (unchanged)",
+   "entries": [
+    {
+     "hash": "d4f02eaafd1a9e9de7d10972ca8e47fa7a985825c3c9c1e249c72683cb3e4f19",
+     "type": "adp.acceptance_spec"
+    },
+    {
+     "hash": "6a16485f31a6434e22c150f22467f3854927268ce17183a73498a38a40e06d9d",
+     "type": "adp.verification_result"
+    },
+    {
+     "hash": "c7c5c1d70c5dec4416ab6158afd0b223ef40c29b1dc1f97ed9428b94d4cadb1c",
+     "type": "a2a.artifact"
+    },
+    {
+     "hash": "d959b638663f9a7de663a1be37e39bc5d820e3dbb3a31b0af1bad43e0c39fc69",
+     "type": "ap2.open_mandate"
+    },
+    {
+     "hash": "1b5b9ccb3e8d006a5230de9bda23ff91edc794d4f56410560830b418528e446c",
+     "type": "x402.settlement"
+    }
+   ],
+   "expect": {
+    "chainHash": "3c3fcb75cffc607280442bd2e3c91ede98704abb0697b25235c1d88277cf6ca1",
+    "ok": true
+   },
+   "id": "D01",
+   "outcome": "SETTLED"
+  },
+  {
+   "description": "payment-free record with adp.owner_authorization",
+   "entries": [
+    {
+     "hash": "d4f02eaafd1a9e9de7d10972ca8e47fa7a985825c3c9c1e249c72683cb3e4f19",
+     "type": "adp.acceptance_spec"
+    },
+    {
+     "hash": "6a16485f31a6434e22c150f22467f3854927268ce17183a73498a38a40e06d9d",
+     "type": "adp.verification_result"
+    },
+    {
+     "hash": "c7c5c1d70c5dec4416ab6158afd0b223ef40c29b1dc1f97ed9428b94d4cadb1c",
+     "type": "a2a.artifact"
+    },
+    {
+     "hash": "bdf49c3c3882102fc017ffb661108c63a836d065888a4093994398cc55c2ea2f",
+     "type": "adp.owner_authorization"
+    }
+   ],
+   "expect": {
+    "chainHash": "83a5374781b35915eb8cebc640e62bf4ca7e64728a63767d2a2cb01117bb4791",
+    "ok": true
+   },
+   "id": "D02",
+   "outcome": "SETTLED"
+  },
+  {
+   "description": "payment-free record with the optional adp.provider_ack entry",
+   "entries": [
+    {
+     "hash": "d4f02eaafd1a9e9de7d10972ca8e47fa7a985825c3c9c1e249c72683cb3e4f19",
+     "type": "adp.acceptance_spec"
+    },
+    {
+     "hash": "6a16485f31a6434e22c150f22467f3854927268ce17183a73498a38a40e06d9d",
+     "type": "adp.verification_result"
+    },
+    {
+     "hash": "c7c5c1d70c5dec4416ab6158afd0b223ef40c29b1dc1f97ed9428b94d4cadb1c",
+     "type": "a2a.artifact"
+    },
+    {
+     "hash": "bdf49c3c3882102fc017ffb661108c63a836d065888a4093994398cc55c2ea2f",
+     "type": "adp.owner_authorization"
+    },
+    {
+     "hash": "64a37929fb113e18daa6263a1fb1f90c51d262552efa5a50596f5f653ba955f8",
+     "type": "adp.provider_ack"
+    }
+   ],
+   "expect": {
+    "chainHash": "93bc8614ed05be77ea71fa3e86a7d81b44de2fc0c27475d15c429dedebeb6cf4",
+    "ok": true
+   },
+   "id": "D03",
+   "outcome": "SETTLED"
+  },
+  {
+   "description": "no authorization entry at all",
+   "entries": [
+    {
+     "hash": "d4f02eaafd1a9e9de7d10972ca8e47fa7a985825c3c9c1e249c72683cb3e4f19",
+     "type": "adp.acceptance_spec"
+    },
+    {
+     "hash": "6a16485f31a6434e22c150f22467f3854927268ce17183a73498a38a40e06d9d",
+     "type": "adp.verification_result"
+    },
+    {
+     "hash": "c7c5c1d70c5dec4416ab6158afd0b223ef40c29b1dc1f97ed9428b94d4cadb1c",
+     "type": "a2a.artifact"
+    }
+   ],
+   "expect": {
+    "error": "MISSING_REQUIRED"
+   },
+   "id": "D04",
+   "outcome": "SETTLED"
+  },
+  {
+   "description": "missing adp.verification_result",
+   "entries": [
+    {
+     "hash": "d4f02eaafd1a9e9de7d10972ca8e47fa7a985825c3c9c1e249c72683cb3e4f19",
+     "type": "adp.acceptance_spec"
+    },
+    {
+     "hash": "c7c5c1d70c5dec4416ab6158afd0b223ef40c29b1dc1f97ed9428b94d4cadb1c",
+     "type": "a2a.artifact"
+    },
+    {
+     "hash": "bdf49c3c3882102fc017ffb661108c63a836d065888a4093994398cc55c2ea2f",
+     "type": "adp.owner_authorization"
+    }
+   ],
+   "expect": {
+    "error": "MISSING_REQUIRED"
+   },
+   "id": "D05",
+   "outcome": "SETTLED"
+  },
+  {
+   "description": "missing a2a.artifact",
+   "entries": [
+    {
+     "hash": "d4f02eaafd1a9e9de7d10972ca8e47fa7a985825c3c9c1e249c72683cb3e4f19",
+     "type": "adp.acceptance_spec"
+    },
+    {
+     "hash": "6a16485f31a6434e22c150f22467f3854927268ce17183a73498a38a40e06d9d",
+     "type": "adp.verification_result"
+    },
+    {
+     "hash": "bdf49c3c3882102fc017ffb661108c63a836d065888a4093994398cc55c2ea2f",
+     "type": "adp.owner_authorization"
+    }
+   ],
+   "expect": {
+    "error": "MISSING_REQUIRED"
+   },
+   "id": "D06",
+   "outcome": "SETTLED"
+  },
+  {
+   "description": "duplicate entry type",
+   "entries": [
+    {
+     "hash": "d4f02eaafd1a9e9de7d10972ca8e47fa7a985825c3c9c1e249c72683cb3e4f19",
+     "type": "adp.acceptance_spec"
+    },
+    {
+     "hash": "6a16485f31a6434e22c150f22467f3854927268ce17183a73498a38a40e06d9d",
+     "type": "adp.verification_result"
+    },
+    {
+     "hash": "c7c5c1d70c5dec4416ab6158afd0b223ef40c29b1dc1f97ed9428b94d4cadb1c",
+     "type": "a2a.artifact"
+    },
+    {
+     "hash": "bdf49c3c3882102fc017ffb661108c63a836d065888a4093994398cc55c2ea2f",
+     "type": "adp.owner_authorization"
+    },
+    {
+     "hash": "fc388d408870ee24f94c508409d87bebd187a8ce3e9ad639354156af4b8d16ca",
+     "type": "adp.owner_authorization"
+    }
+   ],
+   "expect": {
+    "error": "DUPLICATE_ENTRY_TYPE"
+   },
+   "id": "D07",
+   "outcome": "SETTLED"
+  },
+  {
+   "description": "both authorization kinds present",
+   "entries": [
+    {
+     "hash": "d4f02eaafd1a9e9de7d10972ca8e47fa7a985825c3c9c1e249c72683cb3e4f19",
+     "type": "adp.acceptance_spec"
+    },
+    {
+     "hash": "6a16485f31a6434e22c150f22467f3854927268ce17183a73498a38a40e06d9d",
+     "type": "adp.verification_result"
+    },
+    {
+     "hash": "c7c5c1d70c5dec4416ab6158afd0b223ef40c29b1dc1f97ed9428b94d4cadb1c",
+     "type": "a2a.artifact"
+    },
+    {
+     "hash": "d959b638663f9a7de663a1be37e39bc5d820e3dbb3a31b0af1bad43e0c39fc69",
+     "type": "ap2.open_mandate"
+    },
+    {
+     "hash": "bdf49c3c3882102fc017ffb661108c63a836d065888a4093994398cc55c2ea2f",
+     "type": "adp.owner_authorization"
+    }
+   ],
+   "expect": {
+    "chainHash": "00392a5bc55e54fcd773b791921ac04bf535faa96fb5e9ad02b0aba92a781888",
+    "ok": true
+   },
+   "id": "D08",
+   "outcome": "SETTLED"
+  },
+  {
+   "description": "same entries as D02 in another order: identical chainHash",
+   "entries": [
+    {
+     "hash": "bdf49c3c3882102fc017ffb661108c63a836d065888a4093994398cc55c2ea2f",
+     "type": "adp.owner_authorization"
+    },
+    {
+     "hash": "c7c5c1d70c5dec4416ab6158afd0b223ef40c29b1dc1f97ed9428b94d4cadb1c",
+     "type": "a2a.artifact"
+    },
+    {
+     "hash": "6a16485f31a6434e22c150f22467f3854927268ce17183a73498a38a40e06d9d",
+     "type": "adp.verification_result"
+    },
+    {
+     "hash": "d4f02eaafd1a9e9de7d10972ca8e47fa7a985825c3c9c1e249c72683cb3e4f19",
+     "type": "adp.acceptance_spec"
+    }
+   ],
+   "expect": {
+    "chainHash": "83a5374781b35915eb8cebc640e62bf4ca7e64728a63767d2a2cb01117bb4791",
+    "ok": true
+   },
+   "id": "D09",
+   "outcome": "SETTLED"
+  },
+  {
+   "description": "payment-flavoured outcome name is not a valid outcome",
+   "entries": [
+    {
+     "hash": "d4f02eaafd1a9e9de7d10972ca8e47fa7a985825c3c9c1e249c72683cb3e4f19",
+     "type": "adp.acceptance_spec"
+    },
+    {
+     "hash": "6a16485f31a6434e22c150f22467f3854927268ce17183a73498a38a40e06d9d",
+     "type": "adp.verification_result"
+    },
+    {
+     "hash": "c7c5c1d70c5dec4416ab6158afd0b223ef40c29b1dc1f97ed9428b94d4cadb1c",
+     "type": "a2a.artifact"
+    },
+    {
+     "hash": "bdf49c3c3882102fc017ffb661108c63a836d065888a4093994398cc55c2ea2f",
+     "type": "adp.owner_authorization"
+    }
+   ],
+   "expect": {
+    "error": "INVALID_OUTCOME"
+   },
+   "id": "D10",
+   "outcome": "PAID"
+  },
+  {
+   "description": "entry hash is not hex",
+   "entries": [
+    {
+     "hash": "d4f02eaafd1a9e9de7d10972ca8e47fa7a985825c3c9c1e249c72683cb3e4f19",
+     "type": "adp.acceptance_spec"
+    },
+    {
+     "hash": "6a16485f31a6434e22c150f22467f3854927268ce17183a73498a38a40e06d9d",
+     "type": "adp.verification_result"
+    },
+    {
+     "hash": "c7c5c1d70c5dec4416ab6158afd0b223ef40c29b1dc1f97ed9428b94d4cadb1c",
+     "type": "a2a.artifact"
+    },
+    {
+     "hash": "zz",
+     "type": "adp.owner_authorization"
+    }
+   ],
+   "expect": {
+    "error": "INVALID_ENTRY_HASH"
+   },
+   "id": "D11",
+   "outcome": "SETTLED"
+  },
+  {
+   "description": "rejected outcome without payment entries",
+   "entries": [
+    {
+     "hash": "d4f02eaafd1a9e9de7d10972ca8e47fa7a985825c3c9c1e249c72683cb3e4f19",
+     "type": "adp.acceptance_spec"
+    },
+    {
+     "hash": "6a16485f31a6434e22c150f22467f3854927268ce17183a73498a38a40e06d9d",
+     "type": "adp.verification_result"
+    },
+    {
+     "hash": "c7c5c1d70c5dec4416ab6158afd0b223ef40c29b1dc1f97ed9428b94d4cadb1c",
+     "type": "a2a.artifact"
+    },
+    {
+     "hash": "bdf49c3c3882102fc017ffb661108c63a836d065888a4093994398cc55c2ea2f",
+     "type": "adp.owner_authorization"
+    }
+   ],
+   "expect": {
+    "chainHash": "83a5374781b35915eb8cebc640e62bf4ca7e64728a63767d2a2cb01117bb4791",
+    "ok": true
+   },
+   "id": "D12",
+   "outcome": "REJECTED"
+  }
+ ],
+ "keys": {
+  "issuer": {
+   "kid": "agent:insurer.example",
+   "pub": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w"
+  },
+  "provider": {
+   "kid": "agent:review-agent.example",
+   "pub": "7UkoxijRwsbq6QM4kFmVYSlZJzpcY_k2NsFGFKyHN9E"
+  },
+  "third": {
+   "kid": "agent:third.example",
+   "pub": "ypOsFwUYcHHWe4PH_w7-gQjo7EUwV113JoeTM9vavnw"
+  },
+  "verifier": {
+   "kid": "did:key:claims-reviewer-1",
+   "pub": "gTl3Dqh9F19Wo1Rmw0x-zMuNipG07jeiXfYPW4_Js5Q"
+  }
+ },
+ "note": "TEST-ONLY keys. settlementCases: run steps in order against ONE fresh ledger; after an ALLOWED step with consumeIfAllowed=true mark the deal consumed.",
+ "settlementCases": [
+  {
+   "description": "payment-free happy path, no providerAck required (v0.1.1 behaviour)",
+   "id": "S01",
+   "steps": [
+    {
+     "actualDeliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+     "boundSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+     "consumeIfAllowed": false,
+     "evidencePolicy": "strict",
+     "expect": {
+      "decision": "ALLOWED"
+     },
+     "issuerPubKey": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w",
+     "requireProviderAck": null,
+     "spec": {
+      "acceptanceCondition": {
+       "expectedHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd"
+      },
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "evidenceRequirements": [
+       "delivery-hash"
+      ],
+      "issuer": "agent:insurer.example",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "agent:insurer.example",
+       "sig": "f96M3KzJiL-broz61q3Mg5j7UPpSVSPutuG5iQOG5x7ihr8SmPBRVrtPkxaX4yrCl9CSxt-e49_svgOCjULlCA"
+      },
+      "specVersion": "adp-acceptance/0.1",
+      "subjectHash": "246e6ee58390ced952f39391912d03dcfec36d7d60ed878ffc1f0afbf0adf49e",
+      "validity": {
+       "notAfter": "2026-10-29T10:00:00Z",
+       "notBefore": "2026-10-29T09:00:00Z"
+      },
+      "verificationMethod": {
+       "algorithm": "sha-256",
+       "canonicalization": "JCS-RFC8785",
+       "type": "hash-equals"
+      },
+      "verifierAuthorization": {
+       "mode": "designated-key",
+       "verifierKeyId": "did:key:claims-reviewer-1",
+       "verifierPubKey": "gTl3Dqh9F19Wo1Rmw0x-zMuNipG07jeiXfYPW4_Js5Q"
+      }
+     },
+     "vr": {
+      "acceptanceSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "deliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+      "evidenceRefs": [
+       {
+        "hash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+        "type": "delivery-hash"
+       }
+      ],
+      "nonce": "nonce-1",
+      "result": "PASS",
+      "resultVersion": "adp-verification/0.1",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "did:key:claims-reviewer-1",
+       "sig": "uGaFxJZ1R3Uvb-ihuKfP2hvp4PO6QbPWJMfJvGrHjHFGe7sfEu-gdUclOXz9P6aGf7bU6Uc0MA7Zb47ReGhTBg"
+      },
+      "timestamp": "2026-10-29T09:30:00Z",
+      "verifierId": "did:key:claims-reviewer-1"
+     }
+    }
+   ]
+  },
+  {
+   "description": "payment-free profile: valid providerAck required and present",
+   "id": "S02",
+   "steps": [
+    {
+     "actualDeliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+     "boundSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+     "consumeIfAllowed": false,
+     "evidencePolicy": "strict",
+     "expect": {
+      "decision": "ALLOWED"
+     },
+     "issuerPubKey": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w",
+     "requireProviderAck": "7UkoxijRwsbq6QM4kFmVYSlZJzpcY_k2NsFGFKyHN9E",
+     "spec": {
+      "acceptanceCondition": {
+       "expectedHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd"
+      },
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "evidenceRequirements": [
+       "delivery-hash"
+      ],
+      "issuer": "agent:insurer.example",
+      "providerAck": {
+       "kid": "agent:review-agent.example",
+       "sig": "TqPUmBhHAgy7eG9mNOIzNknssmKfp00WXxadpkdH-KyAaaE_L_T6YLlmYoBq-Se5_UEtoLi8rKFpi9Ca9j6oDQ"
+      },
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "agent:insurer.example",
+       "sig": "f96M3KzJiL-broz61q3Mg5j7UPpSVSPutuG5iQOG5x7ihr8SmPBRVrtPkxaX4yrCl9CSxt-e49_svgOCjULlCA"
+      },
+      "specVersion": "adp-acceptance/0.1",
+      "subjectHash": "246e6ee58390ced952f39391912d03dcfec36d7d60ed878ffc1f0afbf0adf49e",
+      "validity": {
+       "notAfter": "2026-10-29T10:00:00Z",
+       "notBefore": "2026-10-29T09:00:00Z"
+      },
+      "verificationMethod": {
+       "algorithm": "sha-256",
+       "canonicalization": "JCS-RFC8785",
+       "type": "hash-equals"
+      },
+      "verifierAuthorization": {
+       "mode": "designated-key",
+       "verifierKeyId": "did:key:claims-reviewer-1",
+       "verifierPubKey": "gTl3Dqh9F19Wo1Rmw0x-zMuNipG07jeiXfYPW4_Js5Q"
+      }
+     },
+     "vr": {
+      "acceptanceSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "deliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+      "evidenceRefs": [
+       {
+        "hash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+        "type": "delivery-hash"
+       }
+      ],
+      "nonce": "nonce-1",
+      "result": "PASS",
+      "resultVersion": "adp-verification/0.1",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "did:key:claims-reviewer-1",
+       "sig": "uGaFxJZ1R3Uvb-ihuKfP2hvp4PO6QbPWJMfJvGrHjHFGe7sfEu-gdUclOXz9P6aGf7bU6Uc0MA7Zb47ReGhTBg"
+      },
+      "timestamp": "2026-10-29T09:30:00Z",
+      "verifierId": "did:key:claims-reviewer-1"
+     }
+    }
+   ]
+  },
+  {
+   "description": "profile: providerAck missing",
+   "id": "S03",
+   "steps": [
+    {
+     "actualDeliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+     "boundSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+     "consumeIfAllowed": false,
+     "evidencePolicy": "strict",
+     "expect": {
+      "error": "INVALID_SIGNATURE"
+     },
+     "issuerPubKey": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w",
+     "requireProviderAck": "7UkoxijRwsbq6QM4kFmVYSlZJzpcY_k2NsFGFKyHN9E",
+     "spec": {
+      "acceptanceCondition": {
+       "expectedHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd"
+      },
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "evidenceRequirements": [
+       "delivery-hash"
+      ],
+      "issuer": "agent:insurer.example",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "agent:insurer.example",
+       "sig": "f96M3KzJiL-broz61q3Mg5j7UPpSVSPutuG5iQOG5x7ihr8SmPBRVrtPkxaX4yrCl9CSxt-e49_svgOCjULlCA"
+      },
+      "specVersion": "adp-acceptance/0.1",
+      "subjectHash": "246e6ee58390ced952f39391912d03dcfec36d7d60ed878ffc1f0afbf0adf49e",
+      "validity": {
+       "notAfter": "2026-10-29T10:00:00Z",
+       "notBefore": "2026-10-29T09:00:00Z"
+      },
+      "verificationMethod": {
+       "algorithm": "sha-256",
+       "canonicalization": "JCS-RFC8785",
+       "type": "hash-equals"
+      },
+      "verifierAuthorization": {
+       "mode": "designated-key",
+       "verifierKeyId": "did:key:claims-reviewer-1",
+       "verifierPubKey": "gTl3Dqh9F19Wo1Rmw0x-zMuNipG07jeiXfYPW4_Js5Q"
+      }
+     },
+     "vr": {
+      "acceptanceSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "deliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+      "evidenceRefs": [
+       {
+        "hash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+        "type": "delivery-hash"
+       }
+      ],
+      "nonce": "nonce-1",
+      "result": "PASS",
+      "resultVersion": "adp-verification/0.1",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "did:key:claims-reviewer-1",
+       "sig": "uGaFxJZ1R3Uvb-ihuKfP2hvp4PO6QbPWJMfJvGrHjHFGe7sfEu-gdUclOXz9P6aGf7bU6Uc0MA7Zb47ReGhTBg"
+      },
+      "timestamp": "2026-10-29T09:30:00Z",
+      "verifierId": "did:key:claims-reviewer-1"
+     }
+    }
+   ]
+  },
+  {
+   "description": "profile: providerAck with a garbage signature",
+   "id": "S04",
+   "steps": [
+    {
+     "actualDeliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+     "boundSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+     "consumeIfAllowed": false,
+     "evidencePolicy": "strict",
+     "expect": {
+      "error": "INVALID_SIGNATURE"
+     },
+     "issuerPubKey": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w",
+     "requireProviderAck": "7UkoxijRwsbq6QM4kFmVYSlZJzpcY_k2NsFGFKyHN9E",
+     "spec": {
+      "acceptanceCondition": {
+       "expectedHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd"
+      },
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "evidenceRequirements": [
+       "delivery-hash"
+      ],
+      "issuer": "agent:insurer.example",
+      "providerAck": {
+       "kid": "agent:review-agent.example",
+       "sig": "AAAA"
+      },
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "agent:insurer.example",
+       "sig": "f96M3KzJiL-broz61q3Mg5j7UPpSVSPutuG5iQOG5x7ihr8SmPBRVrtPkxaX4yrCl9CSxt-e49_svgOCjULlCA"
+      },
+      "specVersion": "adp-acceptance/0.1",
+      "subjectHash": "246e6ee58390ced952f39391912d03dcfec36d7d60ed878ffc1f0afbf0adf49e",
+      "validity": {
+       "notAfter": "2026-10-29T10:00:00Z",
+       "notBefore": "2026-10-29T09:00:00Z"
+      },
+      "verificationMethod": {
+       "algorithm": "sha-256",
+       "canonicalization": "JCS-RFC8785",
+       "type": "hash-equals"
+      },
+      "verifierAuthorization": {
+       "mode": "designated-key",
+       "verifierKeyId": "did:key:claims-reviewer-1",
+       "verifierPubKey": "gTl3Dqh9F19Wo1Rmw0x-zMuNipG07jeiXfYPW4_Js5Q"
+      }
+     },
+     "vr": {
+      "acceptanceSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "deliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+      "evidenceRefs": [
+       {
+        "hash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+        "type": "delivery-hash"
+       }
+      ],
+      "nonce": "nonce-1",
+      "result": "PASS",
+      "resultVersion": "adp-verification/0.1",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "did:key:claims-reviewer-1",
+       "sig": "uGaFxJZ1R3Uvb-ihuKfP2hvp4PO6QbPWJMfJvGrHjHFGe7sfEu-gdUclOXz9P6aGf7bU6Uc0MA7Zb47ReGhTBg"
+      },
+      "timestamp": "2026-10-29T09:30:00Z",
+      "verifierId": "did:key:claims-reviewer-1"
+     }
+    }
+   ]
+  },
+  {
+   "description": "profile: a genuine providerAck of ANOTHER agreement transplanted onto this one",
+   "id": "S05",
+   "steps": [
+    {
+     "actualDeliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+     "boundSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+     "consumeIfAllowed": false,
+     "evidencePolicy": "strict",
+     "expect": {
+      "error": "INVALID_SIGNATURE"
+     },
+     "issuerPubKey": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w",
+     "requireProviderAck": "7UkoxijRwsbq6QM4kFmVYSlZJzpcY_k2NsFGFKyHN9E",
+     "spec": {
+      "acceptanceCondition": {
+       "expectedHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd"
+      },
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "evidenceRequirements": [
+       "delivery-hash"
+      ],
+      "issuer": "agent:insurer.example",
+      "providerAck": {
+       "kid": "agent:review-agent.example",
+       "sig": "rKymdthrIRAJZtIoqrH5cPfnIimCpWNV-fn13ynQXk4M5Rvgldja09CfZ4OsYDGMps8cY-u4jSjxE0F1JA1ZBg"
+      },
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "agent:insurer.example",
+       "sig": "f96M3KzJiL-broz61q3Mg5j7UPpSVSPutuG5iQOG5x7ihr8SmPBRVrtPkxaX4yrCl9CSxt-e49_svgOCjULlCA"
+      },
+      "specVersion": "adp-acceptance/0.1",
+      "subjectHash": "246e6ee58390ced952f39391912d03dcfec36d7d60ed878ffc1f0afbf0adf49e",
+      "validity": {
+       "notAfter": "2026-10-29T10:00:00Z",
+       "notBefore": "2026-10-29T09:00:00Z"
+      },
+      "verificationMethod": {
+       "algorithm": "sha-256",
+       "canonicalization": "JCS-RFC8785",
+       "type": "hash-equals"
+      },
+      "verifierAuthorization": {
+       "mode": "designated-key",
+       "verifierKeyId": "did:key:claims-reviewer-1",
+       "verifierPubKey": "gTl3Dqh9F19Wo1Rmw0x-zMuNipG07jeiXfYPW4_Js5Q"
+      }
+     },
+     "vr": {
+      "acceptanceSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "deliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+      "evidenceRefs": [
+       {
+        "hash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+        "type": "delivery-hash"
+       }
+      ],
+      "nonce": "nonce-1",
+      "result": "PASS",
+      "resultVersion": "adp-verification/0.1",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "did:key:claims-reviewer-1",
+       "sig": "uGaFxJZ1R3Uvb-ihuKfP2hvp4PO6QbPWJMfJvGrHjHFGe7sfEu-gdUclOXz9P6aGf7bU6Uc0MA7Zb47ReGhTBg"
+      },
+      "timestamp": "2026-10-29T09:30:00Z",
+      "verifierId": "did:key:claims-reviewer-1"
+     }
+    }
+   ]
+  },
+  {
+   "description": "profile: providerAck signed by a different key that claims the provider's kid",
+   "id": "S06",
+   "steps": [
+    {
+     "actualDeliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+     "boundSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+     "consumeIfAllowed": false,
+     "evidencePolicy": "strict",
+     "expect": {
+      "error": "INVALID_SIGNATURE"
+     },
+     "issuerPubKey": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w",
+     "requireProviderAck": "7UkoxijRwsbq6QM4kFmVYSlZJzpcY_k2NsFGFKyHN9E",
+     "spec": {
+      "acceptanceCondition": {
+       "expectedHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd"
+      },
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "evidenceRequirements": [
+       "delivery-hash"
+      ],
+      "issuer": "agent:insurer.example",
+      "providerAck": {
+       "kid": "agent:review-agent.example",
+       "sig": "0cB7yqJZlNBrtCibXpQjZbykjvHfCYxm3e7LT7XXyLVmY21YuS-2dIPnBL7NCnpvjliQDI4SjwPgzm8-dZ-tDg"
+      },
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "agent:insurer.example",
+       "sig": "f96M3KzJiL-broz61q3Mg5j7UPpSVSPutuG5iQOG5x7ihr8SmPBRVrtPkxaX4yrCl9CSxt-e49_svgOCjULlCA"
+      },
+      "specVersion": "adp-acceptance/0.1",
+      "subjectHash": "246e6ee58390ced952f39391912d03dcfec36d7d60ed878ffc1f0afbf0adf49e",
+      "validity": {
+       "notAfter": "2026-10-29T10:00:00Z",
+       "notBefore": "2026-10-29T09:00:00Z"
+      },
+      "verificationMethod": {
+       "algorithm": "sha-256",
+       "canonicalization": "JCS-RFC8785",
+       "type": "hash-equals"
+      },
+      "verifierAuthorization": {
+       "mode": "designated-key",
+       "verifierKeyId": "did:key:claims-reviewer-1",
+       "verifierPubKey": "gTl3Dqh9F19Wo1Rmw0x-zMuNipG07jeiXfYPW4_Js5Q"
+      }
+     },
+     "vr": {
+      "acceptanceSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "deliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+      "evidenceRefs": [
+       {
+        "hash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+        "type": "delivery-hash"
+       }
+      ],
+      "nonce": "nonce-1",
+      "result": "PASS",
+      "resultVersion": "adp-verification/0.1",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "did:key:claims-reviewer-1",
+       "sig": "uGaFxJZ1R3Uvb-ihuKfP2hvp4PO6QbPWJMfJvGrHjHFGe7sfEu-gdUclOXz9P6aGf7bU6Uc0MA7Zb47ReGhTBg"
+      },
+      "timestamp": "2026-10-29T09:30:00Z",
+      "verifierId": "did:key:claims-reviewer-1"
+     }
+    }
+   ]
+  },
+  {
+   "description": "profile: the issuer countersigns itself (required provider key equals issuer key)",
+   "id": "S07",
+   "steps": [
+    {
+     "actualDeliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+     "boundSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+     "consumeIfAllowed": false,
+     "evidencePolicy": "strict",
+     "expect": {
+      "error": "INVALID_SIGNATURE"
+     },
+     "issuerPubKey": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w",
+     "requireProviderAck": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w",
+     "spec": {
+      "acceptanceCondition": {
+       "expectedHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd"
+      },
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "evidenceRequirements": [
+       "delivery-hash"
+      ],
+      "issuer": "agent:insurer.example",
+      "providerAck": {
+       "kid": "agent:insurer.example",
+       "sig": "f96M3KzJiL-broz61q3Mg5j7UPpSVSPutuG5iQOG5x7ihr8SmPBRVrtPkxaX4yrCl9CSxt-e49_svgOCjULlCA"
+      },
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "agent:insurer.example",
+       "sig": "f96M3KzJiL-broz61q3Mg5j7UPpSVSPutuG5iQOG5x7ihr8SmPBRVrtPkxaX4yrCl9CSxt-e49_svgOCjULlCA"
+      },
+      "specVersion": "adp-acceptance/0.1",
+      "subjectHash": "246e6ee58390ced952f39391912d03dcfec36d7d60ed878ffc1f0afbf0adf49e",
+      "validity": {
+       "notAfter": "2026-10-29T10:00:00Z",
+       "notBefore": "2026-10-29T09:00:00Z"
+      },
+      "verificationMethod": {
+       "algorithm": "sha-256",
+       "canonicalization": "JCS-RFC8785",
+       "type": "hash-equals"
+      },
+      "verifierAuthorization": {
+       "mode": "designated-key",
+       "verifierKeyId": "did:key:claims-reviewer-1",
+       "verifierPubKey": "gTl3Dqh9F19Wo1Rmw0x-zMuNipG07jeiXfYPW4_Js5Q"
+      }
+     },
+     "vr": {
+      "acceptanceSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "deliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+      "evidenceRefs": [
+       {
+        "hash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+        "type": "delivery-hash"
+       }
+      ],
+      "nonce": "nonce-1",
+      "result": "PASS",
+      "resultVersion": "adp-verification/0.1",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "did:key:claims-reviewer-1",
+       "sig": "uGaFxJZ1R3Uvb-ihuKfP2hvp4PO6QbPWJMfJvGrHjHFGe7sfEu-gdUclOXz9P6aGf7bU6Uc0MA7Zb47ReGhTBg"
+      },
+      "timestamp": "2026-10-29T09:30:00Z",
+      "verifierId": "did:key:claims-reviewer-1"
+     }
+    }
+   ]
+  },
+  {
+   "description": "profile: issuer re-signs a changed agreement (longer validity) but keeps the old providerAck",
+   "id": "S08",
+   "steps": [
+    {
+     "actualDeliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+     "boundSpecHash": "a682117d3481d706a14ad7adced0cc1e8fef26becfec4129ac531b594c2c1114",
+     "consumeIfAllowed": false,
+     "evidencePolicy": "strict",
+     "expect": {
+      "error": "INVALID_SIGNATURE"
+     },
+     "issuerPubKey": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w",
+     "requireProviderAck": "7UkoxijRwsbq6QM4kFmVYSlZJzpcY_k2NsFGFKyHN9E",
+     "spec": {
+      "acceptanceCondition": {
+       "expectedHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd"
+      },
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "evidenceRequirements": [
+       "delivery-hash"
+      ],
+      "issuer": "agent:insurer.example",
+      "providerAck": {
+       "kid": "agent:review-agent.example",
+       "sig": "TqPUmBhHAgy7eG9mNOIzNknssmKfp00WXxadpkdH-KyAaaE_L_T6YLlmYoBq-Se5_UEtoLi8rKFpi9Ca9j6oDQ"
+      },
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "agent:insurer.example",
+       "sig": "_rI7BGqfEqziTuH9Kt6zCxvI9ceE0AYTqgrDB0lDZCa1vHyfMMv512_ErJzO11W7kF4pxGn3mgU7HPy9TnrZAg"
+      },
+      "specVersion": "adp-acceptance/0.1",
+      "subjectHash": "246e6ee58390ced952f39391912d03dcfec36d7d60ed878ffc1f0afbf0adf49e",
+      "validity": {
+       "notAfter": "2026-10-29T11:00:00Z",
+       "notBefore": "2026-10-29T09:00:00Z"
+      },
+      "verificationMethod": {
+       "algorithm": "sha-256",
+       "canonicalization": "JCS-RFC8785",
+       "type": "hash-equals"
+      },
+      "verifierAuthorization": {
+       "mode": "designated-key",
+       "verifierKeyId": "did:key:claims-reviewer-1",
+       "verifierPubKey": "gTl3Dqh9F19Wo1Rmw0x-zMuNipG07jeiXfYPW4_Js5Q"
+      }
+     },
+     "vr": {
+      "acceptanceSpecHash": "a682117d3481d706a14ad7adced0cc1e8fef26becfec4129ac531b594c2c1114",
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "deliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+      "evidenceRefs": [
+       {
+        "hash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+        "type": "delivery-hash"
+       }
+      ],
+      "nonce": "nonce-1",
+      "result": "PASS",
+      "resultVersion": "adp-verification/0.1",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "did:key:claims-reviewer-1",
+       "sig": "cR_U2Go3_Y04BaRv4vBn9xMS3fLvwPedEQb9YUQnRPdh8aDwpLr9NAxDAq-6NbI4izIOwfCdKsqmJOEGURLTCw"
+      },
+      "timestamp": "2026-10-29T09:30:00Z",
+      "verifierId": "did:key:claims-reviewer-1"
+     }
+    }
+   ]
+  },
+  {
+   "description": "default (no profile): a garbage providerAck is ignored exactly as in v0.1.1",
+   "id": "S09",
+   "steps": [
+    {
+     "actualDeliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+     "boundSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+     "consumeIfAllowed": false,
+     "evidencePolicy": "strict",
+     "expect": {
+      "decision": "ALLOWED"
+     },
+     "issuerPubKey": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w",
+     "requireProviderAck": null,
+     "spec": {
+      "acceptanceCondition": {
+       "expectedHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd"
+      },
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "evidenceRequirements": [
+       "delivery-hash"
+      ],
+      "issuer": "agent:insurer.example",
+      "providerAck": {
+       "kid": "agent:review-agent.example",
+       "sig": "AAAA"
+      },
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "agent:insurer.example",
+       "sig": "f96M3KzJiL-broz61q3Mg5j7UPpSVSPutuG5iQOG5x7ihr8SmPBRVrtPkxaX4yrCl9CSxt-e49_svgOCjULlCA"
+      },
+      "specVersion": "adp-acceptance/0.1",
+      "subjectHash": "246e6ee58390ced952f39391912d03dcfec36d7d60ed878ffc1f0afbf0adf49e",
+      "validity": {
+       "notAfter": "2026-10-29T10:00:00Z",
+       "notBefore": "2026-10-29T09:00:00Z"
+      },
+      "verificationMethod": {
+       "algorithm": "sha-256",
+       "canonicalization": "JCS-RFC8785",
+       "type": "hash-equals"
+      },
+      "verifierAuthorization": {
+       "mode": "designated-key",
+       "verifierKeyId": "did:key:claims-reviewer-1",
+       "verifierPubKey": "gTl3Dqh9F19Wo1Rmw0x-zMuNipG07jeiXfYPW4_Js5Q"
+      }
+     },
+     "vr": {
+      "acceptanceSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "deliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+      "evidenceRefs": [
+       {
+        "hash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+        "type": "delivery-hash"
+       }
+      ],
+      "nonce": "nonce-1",
+      "result": "PASS",
+      "resultVersion": "adp-verification/0.1",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "did:key:claims-reviewer-1",
+       "sig": "uGaFxJZ1R3Uvb-ihuKfP2hvp4PO6QbPWJMfJvGrHjHFGe7sfEu-gdUclOXz9P6aGf7bU6Uc0MA7Zb47ReGhTBg"
+      },
+      "timestamp": "2026-10-29T09:30:00Z",
+      "verifierId": "did:key:claims-reviewer-1"
+     }
+    }
+   ]
+  },
+  {
+   "description": "evidence: empty evidenceRefs although delivery-hash is required",
+   "id": "S10",
+   "steps": [
+    {
+     "actualDeliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+     "boundSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+     "consumeIfAllowed": false,
+     "evidencePolicy": "strict",
+     "expect": {
+      "decision": "DENIED",
+      "reasonPrefix": "EVIDENCE_REQUIREMENTS_UNMET"
+     },
+     "issuerPubKey": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w",
+     "requireProviderAck": null,
+     "spec": {
+      "acceptanceCondition": {
+       "expectedHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd"
+      },
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "evidenceRequirements": [
+       "delivery-hash"
+      ],
+      "issuer": "agent:insurer.example",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "agent:insurer.example",
+       "sig": "f96M3KzJiL-broz61q3Mg5j7UPpSVSPutuG5iQOG5x7ihr8SmPBRVrtPkxaX4yrCl9CSxt-e49_svgOCjULlCA"
+      },
+      "specVersion": "adp-acceptance/0.1",
+      "subjectHash": "246e6ee58390ced952f39391912d03dcfec36d7d60ed878ffc1f0afbf0adf49e",
+      "validity": {
+       "notAfter": "2026-10-29T10:00:00Z",
+       "notBefore": "2026-10-29T09:00:00Z"
+      },
+      "verificationMethod": {
+       "algorithm": "sha-256",
+       "canonicalization": "JCS-RFC8785",
+       "type": "hash-equals"
+      },
+      "verifierAuthorization": {
+       "mode": "designated-key",
+       "verifierKeyId": "did:key:claims-reviewer-1",
+       "verifierPubKey": "gTl3Dqh9F19Wo1Rmw0x-zMuNipG07jeiXfYPW4_Js5Q"
+      }
+     },
+     "vr": {
+      "acceptanceSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "deliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+      "evidenceRefs": [],
+      "nonce": "nonce-1",
+      "result": "PASS",
+      "resultVersion": "adp-verification/0.1",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "did:key:claims-reviewer-1",
+       "sig": "M4PEHK3R2poAIbM7jywyyXq6alaxSR3LEhcrhlQn-0JDCGA-YfTTHG-1emC1Do7E9aE20QzISNtZMvT-JLKCDg"
+      },
+      "timestamp": "2026-10-29T09:30:00Z",
+      "verifierId": "did:key:claims-reviewer-1"
+     }
+    }
+   ]
+  },
+  {
+   "description": "evidence: wrong evidence type name",
+   "id": "S11",
+   "steps": [
+    {
+     "actualDeliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+     "boundSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+     "consumeIfAllowed": false,
+     "evidencePolicy": "strict",
+     "expect": {
+      "decision": "DENIED",
+      "reasonPrefix": "EVIDENCE_REQUIREMENTS_UNMET"
+     },
+     "issuerPubKey": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w",
+     "requireProviderAck": null,
+     "spec": {
+      "acceptanceCondition": {
+       "expectedHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd"
+      },
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "evidenceRequirements": [
+       "delivery-hash"
+      ],
+      "issuer": "agent:insurer.example",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "agent:insurer.example",
+       "sig": "f96M3KzJiL-broz61q3Mg5j7UPpSVSPutuG5iQOG5x7ihr8SmPBRVrtPkxaX4yrCl9CSxt-e49_svgOCjULlCA"
+      },
+      "specVersion": "adp-acceptance/0.1",
+      "subjectHash": "246e6ee58390ced952f39391912d03dcfec36d7d60ed878ffc1f0afbf0adf49e",
+      "validity": {
+       "notAfter": "2026-10-29T10:00:00Z",
+       "notBefore": "2026-10-29T09:00:00Z"
+      },
+      "verificationMethod": {
+       "algorithm": "sha-256",
+       "canonicalization": "JCS-RFC8785",
+       "type": "hash-equals"
+      },
+      "verifierAuthorization": {
+       "mode": "designated-key",
+       "verifierKeyId": "did:key:claims-reviewer-1",
+       "verifierPubKey": "gTl3Dqh9F19Wo1Rmw0x-zMuNipG07jeiXfYPW4_Js5Q"
+      }
+     },
+     "vr": {
+      "acceptanceSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "deliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+      "evidenceRefs": [
+       {
+        "hash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+        "type": "deliveryHash"
+       }
+      ],
+      "nonce": "nonce-1",
+      "result": "PASS",
+      "resultVersion": "adp-verification/0.1",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "did:key:claims-reviewer-1",
+       "sig": "zOKOR2lN6xvYLiTxT-lqO9wt5ykuIZjUDE2p2KciIzqGeszbYvivqVnSXdXMZSabw6uaUW7t88fB9y4Ht01DBQ"
+      },
+      "timestamp": "2026-10-29T09:30:00Z",
+      "verifierId": "did:key:claims-reviewer-1"
+     }
+    }
+   ]
+  },
+  {
+   "description": "evidence: delivery-hash entry points to a different delivery",
+   "id": "S12",
+   "steps": [
+    {
+     "actualDeliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+     "boundSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+     "consumeIfAllowed": false,
+     "evidencePolicy": "strict",
+     "expect": {
+      "decision": "DENIED",
+      "reasonPrefix": "EVIDENCE_REQUIREMENTS_UNMET"
+     },
+     "issuerPubKey": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w",
+     "requireProviderAck": null,
+     "spec": {
+      "acceptanceCondition": {
+       "expectedHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd"
+      },
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "evidenceRequirements": [
+       "delivery-hash"
+      ],
+      "issuer": "agent:insurer.example",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "agent:insurer.example",
+       "sig": "f96M3KzJiL-broz61q3Mg5j7UPpSVSPutuG5iQOG5x7ihr8SmPBRVrtPkxaX4yrCl9CSxt-e49_svgOCjULlCA"
+      },
+      "specVersion": "adp-acceptance/0.1",
+      "subjectHash": "246e6ee58390ced952f39391912d03dcfec36d7d60ed878ffc1f0afbf0adf49e",
+      "validity": {
+       "notAfter": "2026-10-29T10:00:00Z",
+       "notBefore": "2026-10-29T09:00:00Z"
+      },
+      "verificationMethod": {
+       "algorithm": "sha-256",
+       "canonicalization": "JCS-RFC8785",
+       "type": "hash-equals"
+      },
+      "verifierAuthorization": {
+       "mode": "designated-key",
+       "verifierKeyId": "did:key:claims-reviewer-1",
+       "verifierPubKey": "gTl3Dqh9F19Wo1Rmw0x-zMuNipG07jeiXfYPW4_Js5Q"
+      }
+     },
+     "vr": {
+      "acceptanceSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "deliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+      "evidenceRefs": [
+       {
+        "hash": "d9298a10d1b0735837dc4bd85dac641b0f3cef27a47e5d53a54f2f3f5b2fcffa",
+        "type": "delivery-hash"
+       }
+      ],
+      "nonce": "nonce-1",
+      "result": "PASS",
+      "resultVersion": "adp-verification/0.1",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "did:key:claims-reviewer-1",
+       "sig": "FKlbC5c7H7kIe-NgT_Ks0JDTL31aCkPCnzFO68CWiPHGAkAT5Vq290ThNzaBDbmYYCywpfOIjPJkOSESTGB7Cg"
+      },
+      "timestamp": "2026-10-29T09:30:00Z",
+      "verifierId": "did:key:claims-reviewer-1"
+     }
+    }
+   ]
+  },
+  {
+   "description": "evidence: hash is not 64 lowercase hex",
+   "id": "S13",
+   "steps": [
+    {
+     "actualDeliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+     "boundSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+     "consumeIfAllowed": false,
+     "evidencePolicy": "strict",
+     "expect": {
+      "decision": "DENIED",
+      "reasonPrefix": "EVIDENCE_REQUIREMENTS_UNMET"
+     },
+     "issuerPubKey": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w",
+     "requireProviderAck": null,
+     "spec": {
+      "acceptanceCondition": {
+       "expectedHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd"
+      },
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "evidenceRequirements": [
+       "delivery-hash"
+      ],
+      "issuer": "agent:insurer.example",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "agent:insurer.example",
+       "sig": "f96M3KzJiL-broz61q3Mg5j7UPpSVSPutuG5iQOG5x7ihr8SmPBRVrtPkxaX4yrCl9CSxt-e49_svgOCjULlCA"
+      },
+      "specVersion": "adp-acceptance/0.1",
+      "subjectHash": "246e6ee58390ced952f39391912d03dcfec36d7d60ed878ffc1f0afbf0adf49e",
+      "validity": {
+       "notAfter": "2026-10-29T10:00:00Z",
+       "notBefore": "2026-10-29T09:00:00Z"
+      },
+      "verificationMethod": {
+       "algorithm": "sha-256",
+       "canonicalization": "JCS-RFC8785",
+       "type": "hash-equals"
+      },
+      "verifierAuthorization": {
+       "mode": "designated-key",
+       "verifierKeyId": "did:key:claims-reviewer-1",
+       "verifierPubKey": "gTl3Dqh9F19Wo1Rmw0x-zMuNipG07jeiXfYPW4_Js5Q"
+      }
+     },
+     "vr": {
+      "acceptanceSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "deliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+      "evidenceRefs": [
+       {
+        "hash": "6BF9E1BFF95ED16752A4DA05B2715F8BB65265B147E159F3DA28BCB56CFD87FD",
+        "type": "delivery-hash"
+       }
+      ],
+      "nonce": "nonce-1",
+      "result": "PASS",
+      "resultVersion": "adp-verification/0.1",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "did:key:claims-reviewer-1",
+       "sig": "qR0XHiF7bu-d0H2250jILl8NQLR_Nlrw6tYpEyZBLIuSyN0nJtKZU5Jjdls-F8LjVorUKkVVJkHnxHsYNBrXDg"
+      },
+      "timestamp": "2026-10-29T09:30:00Z",
+      "verifierId": "did:key:claims-reviewer-1"
+     }
+    }
+   ]
+  },
+  {
+   "description": "evidence: sandboxed-test-suite without test-execution-log-hash",
+   "id": "S14",
+   "steps": [
+    {
+     "actualDeliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+     "boundSpecHash": "44cbc0a9adee1ec653f0c8f0cddd34442dcd1914ea732d3c4f05663ff8135ba0",
+     "consumeIfAllowed": false,
+     "evidencePolicy": "strict",
+     "expect": {
+      "decision": "DENIED",
+      "reasonPrefix": "EVIDENCE_REQUIREMENTS_UNMET"
+     },
+     "issuerPubKey": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w",
+     "requireProviderAck": null,
+     "spec": {
+      "acceptanceCondition": {
+       "requiredExitCode": 0
+      },
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "evidenceRequirements": [
+       "delivery-hash"
+      ],
+      "issuer": "agent:insurer.example",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "agent:insurer.example",
+       "sig": "HIVkaWbHFlbyScRv82iYoJZECziiFZGt8DfYD_5C7zIQrWV2ruUWvOZ8GwnRSontArGcgnKpKaNeDFNH6DQ6CA"
+      },
+      "specVersion": "adp-acceptance/0.1",
+      "subjectHash": "246e6ee58390ced952f39391912d03dcfec36d7d60ed878ffc1f0afbf0adf49e",
+      "validity": {
+       "notAfter": "2026-10-29T10:00:00Z",
+       "notBefore": "2026-10-29T09:00:00Z"
+      },
+      "verificationMethod": {
+       "sandboxProfile": {
+        "maxMemoryMB": 512,
+        "maxRuntimeSeconds": 30,
+        "network": "none"
+       },
+       "testSuiteHash": "f8ebd43dbef1f029bf4930c65c9b7c5cc76af476927cee861ff18fcc73bfc4ab",
+       "type": "sandboxed-test-suite"
+      },
+      "verifierAuthorization": {
+       "mode": "designated-key",
+       "verifierKeyId": "did:key:claims-reviewer-1",
+       "verifierPubKey": "gTl3Dqh9F19Wo1Rmw0x-zMuNipG07jeiXfYPW4_Js5Q"
+      }
+     },
+     "vr": {
+      "acceptanceSpecHash": "44cbc0a9adee1ec653f0c8f0cddd34442dcd1914ea732d3c4f05663ff8135ba0",
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "deliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+      "evidenceRefs": [
+       {
+        "hash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+        "type": "delivery-hash"
+       }
+      ],
+      "nonce": "nonce-1",
+      "result": "PASS",
+      "resultVersion": "adp-verification/0.1",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "did:key:claims-reviewer-1",
+       "sig": "hfw147HuJ9zWK65IPTcqDDzRAidJxeZTX0G7wjB6jwCK0I1JYJTKhuvnePXX-nXENaJAO3TrOrVdZUU9t-X_Dg"
+      },
+      "timestamp": "2026-10-29T09:30:00Z",
+      "verifierId": "did:key:claims-reviewer-1"
+     }
+    }
+   ]
+  },
+  {
+   "description": "evidence: sandboxed-test-suite with the log hash is accepted",
+   "id": "S14b",
+   "steps": [
+    {
+     "actualDeliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+     "boundSpecHash": "44cbc0a9adee1ec653f0c8f0cddd34442dcd1914ea732d3c4f05663ff8135ba0",
+     "consumeIfAllowed": false,
+     "evidencePolicy": "strict",
+     "expect": {
+      "decision": "ALLOWED"
+     },
+     "issuerPubKey": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w",
+     "requireProviderAck": null,
+     "spec": {
+      "acceptanceCondition": {
+       "requiredExitCode": 0
+      },
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "evidenceRequirements": [
+       "delivery-hash"
+      ],
+      "issuer": "agent:insurer.example",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "agent:insurer.example",
+       "sig": "HIVkaWbHFlbyScRv82iYoJZECziiFZGt8DfYD_5C7zIQrWV2ruUWvOZ8GwnRSontArGcgnKpKaNeDFNH6DQ6CA"
+      },
+      "specVersion": "adp-acceptance/0.1",
+      "subjectHash": "246e6ee58390ced952f39391912d03dcfec36d7d60ed878ffc1f0afbf0adf49e",
+      "validity": {
+       "notAfter": "2026-10-29T10:00:00Z",
+       "notBefore": "2026-10-29T09:00:00Z"
+      },
+      "verificationMethod": {
+       "sandboxProfile": {
+        "maxMemoryMB": 512,
+        "maxRuntimeSeconds": 30,
+        "network": "none"
+       },
+       "testSuiteHash": "f8ebd43dbef1f029bf4930c65c9b7c5cc76af476927cee861ff18fcc73bfc4ab",
+       "type": "sandboxed-test-suite"
+      },
+      "verifierAuthorization": {
+       "mode": "designated-key",
+       "verifierKeyId": "did:key:claims-reviewer-1",
+       "verifierPubKey": "gTl3Dqh9F19Wo1Rmw0x-zMuNipG07jeiXfYPW4_Js5Q"
+      }
+     },
+     "vr": {
+      "acceptanceSpecHash": "44cbc0a9adee1ec653f0c8f0cddd34442dcd1914ea732d3c4f05663ff8135ba0",
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "deliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+      "evidenceRefs": [
+       {
+        "hash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+        "type": "delivery-hash"
+       },
+       {
+        "hash": "836ff184e7b41b1e13cb5fd89fa1de98dbbab99e9d2918913ff43b86a5c7c213",
+        "type": "test-execution-log-hash"
+       }
+      ],
+      "nonce": "nonce-1",
+      "result": "PASS",
+      "resultVersion": "adp-verification/0.1",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "did:key:claims-reviewer-1",
+       "sig": "lTyndc5MYD2cr479VDjZlc1NZRKsPuavdxDQbWYVnP-7zorad-Msw6tQbJ_WsdIrpogZdu8YErZLn3C0GgxhBw"
+      },
+      "timestamp": "2026-10-29T09:30:00Z",
+      "verifierId": "did:key:claims-reviewer-1"
+     }
+    }
+   ]
+  },
+  {
+   "description": "evidence: an extra well-formed evidence type is allowed",
+   "id": "S15",
+   "steps": [
+    {
+     "actualDeliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+     "boundSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+     "consumeIfAllowed": false,
+     "evidencePolicy": "strict",
+     "expect": {
+      "decision": "ALLOWED"
+     },
+     "issuerPubKey": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w",
+     "requireProviderAck": null,
+     "spec": {
+      "acceptanceCondition": {
+       "expectedHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd"
+      },
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "evidenceRequirements": [
+       "delivery-hash"
+      ],
+      "issuer": "agent:insurer.example",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "agent:insurer.example",
+       "sig": "f96M3KzJiL-broz61q3Mg5j7UPpSVSPutuG5iQOG5x7ihr8SmPBRVrtPkxaX4yrCl9CSxt-e49_svgOCjULlCA"
+      },
+      "specVersion": "adp-acceptance/0.1",
+      "subjectHash": "246e6ee58390ced952f39391912d03dcfec36d7d60ed878ffc1f0afbf0adf49e",
+      "validity": {
+       "notAfter": "2026-10-29T10:00:00Z",
+       "notBefore": "2026-10-29T09:00:00Z"
+      },
+      "verificationMethod": {
+       "algorithm": "sha-256",
+       "canonicalization": "JCS-RFC8785",
+       "type": "hash-equals"
+      },
+      "verifierAuthorization": {
+       "mode": "designated-key",
+       "verifierKeyId": "did:key:claims-reviewer-1",
+       "verifierPubKey": "gTl3Dqh9F19Wo1Rmw0x-zMuNipG07jeiXfYPW4_Js5Q"
+      }
+     },
+     "vr": {
+      "acceptanceSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "deliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+      "evidenceRefs": [
+       {
+        "hash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+        "type": "delivery-hash"
+       },
+       {
+        "hash": "edb465624291e4053c6c5ea4b7eb320dec773e10a57d26b95dcf0564f8e310f8",
+        "type": "reviewer-note"
+       }
+      ],
+      "nonce": "nonce-1",
+      "result": "PASS",
+      "resultVersion": "adp-verification/0.1",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "did:key:claims-reviewer-1",
+       "sig": "-BAYGM2pyktkw9Uq5B-2W9g9FTt8guL2jb0J1KeSe4tSP2PGpIP3qYTivKkQPRDuH5oifrlzPGyWlhUKNhpABQ"
+      },
+      "timestamp": "2026-10-29T09:30:00Z",
+      "verifierId": "did:key:claims-reviewer-1"
+     }
+    }
+   ]
+  },
+  {
+   "description": "evidence: no requirements and no refs",
+   "id": "S16",
+   "steps": [
+    {
+     "actualDeliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+     "boundSpecHash": "39a77f88c9183f4d59c2b558a264874795155f5f7d150e4924528d0d3fb99730",
+     "consumeIfAllowed": false,
+     "evidencePolicy": "strict",
+     "expect": {
+      "decision": "ALLOWED"
+     },
+     "issuerPubKey": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w",
+     "requireProviderAck": null,
+     "spec": {
+      "acceptanceCondition": {
+       "expectedHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd"
+      },
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "evidenceRequirements": [],
+      "issuer": "agent:insurer.example",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "agent:insurer.example",
+       "sig": "wfXzWzep5T4wjCK431zhgtNGElyLzRFVxHlq7mzZNsqXkVhQxArpon2KDolLjt3rq0s2024oJINItC46TmUgDQ"
+      },
+      "specVersion": "adp-acceptance/0.1",
+      "subjectHash": "246e6ee58390ced952f39391912d03dcfec36d7d60ed878ffc1f0afbf0adf49e",
+      "validity": {
+       "notAfter": "2026-10-29T10:00:00Z",
+       "notBefore": "2026-10-29T09:00:00Z"
+      },
+      "verificationMethod": {
+       "algorithm": "sha-256",
+       "canonicalization": "JCS-RFC8785",
+       "type": "hash-equals"
+      },
+      "verifierAuthorization": {
+       "mode": "designated-key",
+       "verifierKeyId": "did:key:claims-reviewer-1",
+       "verifierPubKey": "gTl3Dqh9F19Wo1Rmw0x-zMuNipG07jeiXfYPW4_Js5Q"
+      }
+     },
+     "vr": {
+      "acceptanceSpecHash": "39a77f88c9183f4d59c2b558a264874795155f5f7d150e4924528d0d3fb99730",
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "deliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+      "evidenceRefs": [],
+      "nonce": "nonce-1",
+      "result": "PASS",
+      "resultVersion": "adp-verification/0.1",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "did:key:claims-reviewer-1",
+       "sig": "SMQGzDf3_Gj7z9vT7ZfjoUh_2QdLLuVqFZL7zDock3gKe4DHAecUw48XS7y6GsGE9hRNyiygURhaITVmFNkNBA"
+      },
+      "timestamp": "2026-10-29T09:30:00Z",
+      "verifierId": "did:key:claims-reviewer-1"
+     }
+    }
+   ]
+  },
+  {
+   "description": "evidence: legacy-unchecked policy keeps the v0.1.1 behaviour (migration aid only)",
+   "id": "S16b",
+   "steps": [
+    {
+     "actualDeliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+     "boundSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+     "consumeIfAllowed": false,
+     "evidencePolicy": "legacy-unchecked",
+     "expect": {
+      "decision": "ALLOWED"
+     },
+     "issuerPubKey": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w",
+     "requireProviderAck": null,
+     "spec": {
+      "acceptanceCondition": {
+       "expectedHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd"
+      },
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "evidenceRequirements": [
+       "delivery-hash"
+      ],
+      "issuer": "agent:insurer.example",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "agent:insurer.example",
+       "sig": "f96M3KzJiL-broz61q3Mg5j7UPpSVSPutuG5iQOG5x7ihr8SmPBRVrtPkxaX4yrCl9CSxt-e49_svgOCjULlCA"
+      },
+      "specVersion": "adp-acceptance/0.1",
+      "subjectHash": "246e6ee58390ced952f39391912d03dcfec36d7d60ed878ffc1f0afbf0adf49e",
+      "validity": {
+       "notAfter": "2026-10-29T10:00:00Z",
+       "notBefore": "2026-10-29T09:00:00Z"
+      },
+      "verificationMethod": {
+       "algorithm": "sha-256",
+       "canonicalization": "JCS-RFC8785",
+       "type": "hash-equals"
+      },
+      "verifierAuthorization": {
+       "mode": "designated-key",
+       "verifierKeyId": "did:key:claims-reviewer-1",
+       "verifierPubKey": "gTl3Dqh9F19Wo1Rmw0x-zMuNipG07jeiXfYPW4_Js5Q"
+      }
+     },
+     "vr": {
+      "acceptanceSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "deliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+      "evidenceRefs": [],
+      "nonce": "nonce-1",
+      "result": "PASS",
+      "resultVersion": "adp-verification/0.1",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "did:key:claims-reviewer-1",
+       "sig": "M4PEHK3R2poAIbM7jywyyXq6alaxSR3LEhcrhlQn-0JDCGA-YfTTHG-1emC1Do7E9aE20QzISNtZMvT-JLKCDg"
+      },
+      "timestamp": "2026-10-29T09:30:00Z",
+      "verifierId": "did:key:claims-reviewer-1"
+     }
+    }
+   ]
+  },
+  {
+   "description": "FAIL result with complete evidence",
+   "id": "S17",
+   "steps": [
+    {
+     "actualDeliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+     "boundSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+     "consumeIfAllowed": false,
+     "evidencePolicy": "strict",
+     "expect": {
+      "decision": "DENIED",
+      "reasonPrefix": "VerificationResult.result"
+     },
+     "issuerPubKey": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w",
+     "requireProviderAck": null,
+     "spec": {
+      "acceptanceCondition": {
+       "expectedHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd"
+      },
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "evidenceRequirements": [
+       "delivery-hash"
+      ],
+      "issuer": "agent:insurer.example",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "agent:insurer.example",
+       "sig": "f96M3KzJiL-broz61q3Mg5j7UPpSVSPutuG5iQOG5x7ihr8SmPBRVrtPkxaX4yrCl9CSxt-e49_svgOCjULlCA"
+      },
+      "specVersion": "adp-acceptance/0.1",
+      "subjectHash": "246e6ee58390ced952f39391912d03dcfec36d7d60ed878ffc1f0afbf0adf49e",
+      "validity": {
+       "notAfter": "2026-10-29T10:00:00Z",
+       "notBefore": "2026-10-29T09:00:00Z"
+      },
+      "verificationMethod": {
+       "algorithm": "sha-256",
+       "canonicalization": "JCS-RFC8785",
+       "type": "hash-equals"
+      },
+      "verifierAuthorization": {
+       "mode": "designated-key",
+       "verifierKeyId": "did:key:claims-reviewer-1",
+       "verifierPubKey": "gTl3Dqh9F19Wo1Rmw0x-zMuNipG07jeiXfYPW4_Js5Q"
+      }
+     },
+     "vr": {
+      "acceptanceSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "deliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+      "evidenceRefs": [
+       {
+        "hash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+        "type": "delivery-hash"
+       }
+      ],
+      "nonce": "nonce-1",
+      "result": "FAIL",
+      "resultVersion": "adp-verification/0.1",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "did:key:claims-reviewer-1",
+       "sig": "0Wdo1VNDaszC-DBhRnKatMre6nU6YFjuAVcZoV6PS8wWUbDnl4eEDG4AMbjavro7qdLStN7FUzCSqiQBqrmYCQ"
+      },
+      "timestamp": "2026-10-29T09:30:00Z",
+      "verifierId": "did:key:claims-reviewer-1"
+     }
+    }
+   ]
+  },
+  {
+   "description": "delivery presented is not the one that was verified",
+   "id": "S18",
+   "steps": [
+    {
+     "actualDeliveryHash": "f41f3fa625ff120ddca7ef456bf66371ecea23c129f4e4c32367101edb516cf8",
+     "boundSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+     "consumeIfAllowed": false,
+     "evidencePolicy": "strict",
+     "expect": {
+      "error": "DELIVERY_HASH_MISMATCH"
+     },
+     "issuerPubKey": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w",
+     "requireProviderAck": null,
+     "spec": {
+      "acceptanceCondition": {
+       "expectedHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd"
+      },
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "evidenceRequirements": [
+       "delivery-hash"
+      ],
+      "issuer": "agent:insurer.example",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "agent:insurer.example",
+       "sig": "f96M3KzJiL-broz61q3Mg5j7UPpSVSPutuG5iQOG5x7ihr8SmPBRVrtPkxaX4yrCl9CSxt-e49_svgOCjULlCA"
+      },
+      "specVersion": "adp-acceptance/0.1",
+      "subjectHash": "246e6ee58390ced952f39391912d03dcfec36d7d60ed878ffc1f0afbf0adf49e",
+      "validity": {
+       "notAfter": "2026-10-29T10:00:00Z",
+       "notBefore": "2026-10-29T09:00:00Z"
+      },
+      "verificationMethod": {
+       "algorithm": "sha-256",
+       "canonicalization": "JCS-RFC8785",
+       "type": "hash-equals"
+      },
+      "verifierAuthorization": {
+       "mode": "designated-key",
+       "verifierKeyId": "did:key:claims-reviewer-1",
+       "verifierPubKey": "gTl3Dqh9F19Wo1Rmw0x-zMuNipG07jeiXfYPW4_Js5Q"
+      }
+     },
+     "vr": {
+      "acceptanceSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "deliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+      "evidenceRefs": [
+       {
+        "hash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+        "type": "delivery-hash"
+       }
+      ],
+      "nonce": "nonce-1",
+      "result": "PASS",
+      "resultVersion": "adp-verification/0.1",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "did:key:claims-reviewer-1",
+       "sig": "uGaFxJZ1R3Uvb-ihuKfP2hvp4PO6QbPWJMfJvGrHjHFGe7sfEu-gdUclOXz9P6aGf7bU6Uc0MA7Zb47ReGhTBg"
+      },
+      "timestamp": "2026-10-29T09:30:00Z",
+      "verifierId": "did:key:claims-reviewer-1"
+     }
+    }
+   ]
+  },
+  {
+   "description": "result from an unauthorized verifier",
+   "id": "S19",
+   "steps": [
+    {
+     "actualDeliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+     "boundSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+     "consumeIfAllowed": false,
+     "evidencePolicy": "strict",
+     "expect": {
+      "error": "UNAUTHORIZED_VERIFIER"
+     },
+     "issuerPubKey": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w",
+     "requireProviderAck": null,
+     "spec": {
+      "acceptanceCondition": {
+       "expectedHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd"
+      },
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "evidenceRequirements": [
+       "delivery-hash"
+      ],
+      "issuer": "agent:insurer.example",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "agent:insurer.example",
+       "sig": "f96M3KzJiL-broz61q3Mg5j7UPpSVSPutuG5iQOG5x7ihr8SmPBRVrtPkxaX4yrCl9CSxt-e49_svgOCjULlCA"
+      },
+      "specVersion": "adp-acceptance/0.1",
+      "subjectHash": "246e6ee58390ced952f39391912d03dcfec36d7d60ed878ffc1f0afbf0adf49e",
+      "validity": {
+       "notAfter": "2026-10-29T10:00:00Z",
+       "notBefore": "2026-10-29T09:00:00Z"
+      },
+      "verificationMethod": {
+       "algorithm": "sha-256",
+       "canonicalization": "JCS-RFC8785",
+       "type": "hash-equals"
+      },
+      "verifierAuthorization": {
+       "mode": "designated-key",
+       "verifierKeyId": "did:key:claims-reviewer-1",
+       "verifierPubKey": "gTl3Dqh9F19Wo1Rmw0x-zMuNipG07jeiXfYPW4_Js5Q"
+      }
+     },
+     "vr": {
+      "acceptanceSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "deliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+      "evidenceRefs": [
+       {
+        "hash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+        "type": "delivery-hash"
+       }
+      ],
+      "nonce": "nonce-1",
+      "result": "PASS",
+      "resultVersion": "adp-verification/0.1",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "did:key:impostor",
+       "sig": "mC2PM23jbipiIvEixdRIuobJkATTZP5zLt72YoI92sJKZtziqofWwoPbrPscJ5QQT1rvTNLgi7_k6GaMDHhXDg"
+      },
+      "timestamp": "2026-10-29T09:30:00Z",
+      "verifierId": "did:key:impostor"
+     }
+    }
+   ]
+  },
+  {
+   "description": "result flipped FAIL -> PASS after signing",
+   "id": "S20",
+   "steps": [
+    {
+     "actualDeliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+     "boundSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+     "consumeIfAllowed": false,
+     "evidencePolicy": "strict",
+     "expect": {
+      "error": "INVALID_SIGNATURE"
+     },
+     "issuerPubKey": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w",
+     "requireProviderAck": null,
+     "spec": {
+      "acceptanceCondition": {
+       "expectedHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd"
+      },
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "evidenceRequirements": [
+       "delivery-hash"
+      ],
+      "issuer": "agent:insurer.example",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "agent:insurer.example",
+       "sig": "f96M3KzJiL-broz61q3Mg5j7UPpSVSPutuG5iQOG5x7ihr8SmPBRVrtPkxaX4yrCl9CSxt-e49_svgOCjULlCA"
+      },
+      "specVersion": "adp-acceptance/0.1",
+      "subjectHash": "246e6ee58390ced952f39391912d03dcfec36d7d60ed878ffc1f0afbf0adf49e",
+      "validity": {
+       "notAfter": "2026-10-29T10:00:00Z",
+       "notBefore": "2026-10-29T09:00:00Z"
+      },
+      "verificationMethod": {
+       "algorithm": "sha-256",
+       "canonicalization": "JCS-RFC8785",
+       "type": "hash-equals"
+      },
+      "verifierAuthorization": {
+       "mode": "designated-key",
+       "verifierKeyId": "did:key:claims-reviewer-1",
+       "verifierPubKey": "gTl3Dqh9F19Wo1Rmw0x-zMuNipG07jeiXfYPW4_Js5Q"
+      }
+     },
+     "vr": {
+      "acceptanceSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "deliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+      "evidenceRefs": [
+       {
+        "hash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+        "type": "delivery-hash"
+       }
+      ],
+      "nonce": "nonce-1",
+      "result": "PASS",
+      "resultVersion": "adp-verification/0.1",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "did:key:claims-reviewer-1",
+       "sig": "0Wdo1VNDaszC-DBhRnKatMre6nU6YFjuAVcZoV6PS8wWUbDnl4eEDG4AMbjavro7qdLStN7FUzCSqiQBqrmYCQ"
+      },
+      "timestamp": "2026-10-29T09:30:00Z",
+      "verifierId": "did:key:claims-reviewer-1"
+     }
+    }
+   ]
+  },
+  {
+   "description": "result timestamp outside validity",
+   "id": "S21",
+   "steps": [
+    {
+     "actualDeliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+     "boundSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+     "consumeIfAllowed": false,
+     "evidencePolicy": "strict",
+     "expect": {
+      "error": "VERIFICATION_EXPIRED"
+     },
+     "issuerPubKey": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w",
+     "requireProviderAck": null,
+     "spec": {
+      "acceptanceCondition": {
+       "expectedHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd"
+      },
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "evidenceRequirements": [
+       "delivery-hash"
+      ],
+      "issuer": "agent:insurer.example",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "agent:insurer.example",
+       "sig": "f96M3KzJiL-broz61q3Mg5j7UPpSVSPutuG5iQOG5x7ihr8SmPBRVrtPkxaX4yrCl9CSxt-e49_svgOCjULlCA"
+      },
+      "specVersion": "adp-acceptance/0.1",
+      "subjectHash": "246e6ee58390ced952f39391912d03dcfec36d7d60ed878ffc1f0afbf0adf49e",
+      "validity": {
+       "notAfter": "2026-10-29T10:00:00Z",
+       "notBefore": "2026-10-29T09:00:00Z"
+      },
+      "verificationMethod": {
+       "algorithm": "sha-256",
+       "canonicalization": "JCS-RFC8785",
+       "type": "hash-equals"
+      },
+      "verifierAuthorization": {
+       "mode": "designated-key",
+       "verifierKeyId": "did:key:claims-reviewer-1",
+       "verifierPubKey": "gTl3Dqh9F19Wo1Rmw0x-zMuNipG07jeiXfYPW4_Js5Q"
+      }
+     },
+     "vr": {
+      "acceptanceSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "deliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+      "evidenceRefs": [
+       {
+        "hash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+        "type": "delivery-hash"
+       }
+      ],
+      "nonce": "nonce-1",
+      "result": "PASS",
+      "resultVersion": "adp-verification/0.1",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "did:key:claims-reviewer-1",
+       "sig": "jEtw6b5WAwAO9XC6XmFm0VGPDH2ZzYps3zx6q5y5P3uAtP9LCEbmZGeutXiX2NwKLGpgaxq_AdbUQ7nSDHe-Bw"
+      },
+      "timestamp": "2026-10-29T10:30:00Z",
+      "verifierId": "did:key:claims-reviewer-1"
+     }
+    }
+   ]
+  },
+  {
+   "description": "a different, validly signed spec is bound instead",
+   "id": "S22",
+   "steps": [
+    {
+     "actualDeliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+     "boundSpecHash": "5f7794ab6cddbfbb6db8520f65bf32ef0ab1f2defc7f29555dc619cb4b160f3b",
+     "consumeIfAllowed": false,
+     "evidencePolicy": "strict",
+     "expect": {
+      "error": "ACCEPTANCE_SPEC_MISMATCH"
+     },
+     "issuerPubKey": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w",
+     "requireProviderAck": null,
+     "spec": {
+      "acceptanceCondition": {
+       "expectedHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd"
+      },
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "evidenceRequirements": [
+       "delivery-hash"
+      ],
+      "issuer": "agent:insurer.example",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "agent:insurer.example",
+       "sig": "f96M3KzJiL-broz61q3Mg5j7UPpSVSPutuG5iQOG5x7ihr8SmPBRVrtPkxaX4yrCl9CSxt-e49_svgOCjULlCA"
+      },
+      "specVersion": "adp-acceptance/0.1",
+      "subjectHash": "246e6ee58390ced952f39391912d03dcfec36d7d60ed878ffc1f0afbf0adf49e",
+      "validity": {
+       "notAfter": "2026-10-29T10:00:00Z",
+       "notBefore": "2026-10-29T09:00:00Z"
+      },
+      "verificationMethod": {
+       "algorithm": "sha-256",
+       "canonicalization": "JCS-RFC8785",
+       "type": "hash-equals"
+      },
+      "verifierAuthorization": {
+       "mode": "designated-key",
+       "verifierKeyId": "did:key:claims-reviewer-1",
+       "verifierPubKey": "gTl3Dqh9F19Wo1Rmw0x-zMuNipG07jeiXfYPW4_Js5Q"
+      }
+     },
+     "vr": {
+      "acceptanceSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "deliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+      "evidenceRefs": [
+       {
+        "hash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+        "type": "delivery-hash"
+       }
+      ],
+      "nonce": "nonce-1",
+      "result": "PASS",
+      "resultVersion": "adp-verification/0.1",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "did:key:claims-reviewer-1",
+       "sig": "uGaFxJZ1R3Uvb-ihuKfP2hvp4PO6QbPWJMfJvGrHjHFGe7sfEu-gdUclOXz9P6aGf7bU6Uc0MA7Zb47ReGhTBg"
+      },
+      "timestamp": "2026-10-29T09:30:00Z",
+      "verifierId": "did:key:claims-reviewer-1"
+     }
+    }
+   ]
+  },
+  {
+   "description": "the same VerificationResult presented twice (nonce replay)",
+   "id": "S23",
+   "steps": [
+    {
+     "actualDeliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+     "boundSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+     "consumeIfAllowed": false,
+     "evidencePolicy": "strict",
+     "expect": {
+      "decision": "ALLOWED"
+     },
+     "issuerPubKey": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w",
+     "requireProviderAck": null,
+     "spec": {
+      "acceptanceCondition": {
+       "expectedHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd"
+      },
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "evidenceRequirements": [
+       "delivery-hash"
+      ],
+      "issuer": "agent:insurer.example",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "agent:insurer.example",
+       "sig": "f96M3KzJiL-broz61q3Mg5j7UPpSVSPutuG5iQOG5x7ihr8SmPBRVrtPkxaX4yrCl9CSxt-e49_svgOCjULlCA"
+      },
+      "specVersion": "adp-acceptance/0.1",
+      "subjectHash": "246e6ee58390ced952f39391912d03dcfec36d7d60ed878ffc1f0afbf0adf49e",
+      "validity": {
+       "notAfter": "2026-10-29T10:00:00Z",
+       "notBefore": "2026-10-29T09:00:00Z"
+      },
+      "verificationMethod": {
+       "algorithm": "sha-256",
+       "canonicalization": "JCS-RFC8785",
+       "type": "hash-equals"
+      },
+      "verifierAuthorization": {
+       "mode": "designated-key",
+       "verifierKeyId": "did:key:claims-reviewer-1",
+       "verifierPubKey": "gTl3Dqh9F19Wo1Rmw0x-zMuNipG07jeiXfYPW4_Js5Q"
+      }
+     },
+     "vr": {
+      "acceptanceSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "deliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+      "evidenceRefs": [
+       {
+        "hash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+        "type": "delivery-hash"
+       }
+      ],
+      "nonce": "n-replay",
+      "result": "PASS",
+      "resultVersion": "adp-verification/0.1",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "did:key:claims-reviewer-1",
+       "sig": "liYoeSTM7GGXTtuBDBFNmI94cA4oiMJKU0FmlIcBX_QdOJYZ7yqbjVZ-yf2Dxe6h1r7rlpXCw3n4wmydYsxwAA"
+      },
+      "timestamp": "2026-10-29T09:30:00Z",
+      "verifierId": "did:key:claims-reviewer-1"
+     }
+    },
+    {
+     "actualDeliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+     "boundSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+     "consumeIfAllowed": false,
+     "evidencePolicy": "strict",
+     "expect": {
+      "error": "NONCE_REPLAY"
+     },
+     "issuerPubKey": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w",
+     "requireProviderAck": null,
+     "spec": {
+      "acceptanceCondition": {
+       "expectedHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd"
+      },
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "evidenceRequirements": [
+       "delivery-hash"
+      ],
+      "issuer": "agent:insurer.example",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "agent:insurer.example",
+       "sig": "f96M3KzJiL-broz61q3Mg5j7UPpSVSPutuG5iQOG5x7ihr8SmPBRVrtPkxaX4yrCl9CSxt-e49_svgOCjULlCA"
+      },
+      "specVersion": "adp-acceptance/0.1",
+      "subjectHash": "246e6ee58390ced952f39391912d03dcfec36d7d60ed878ffc1f0afbf0adf49e",
+      "validity": {
+       "notAfter": "2026-10-29T10:00:00Z",
+       "notBefore": "2026-10-29T09:00:00Z"
+      },
+      "verificationMethod": {
+       "algorithm": "sha-256",
+       "canonicalization": "JCS-RFC8785",
+       "type": "hash-equals"
+      },
+      "verifierAuthorization": {
+       "mode": "designated-key",
+       "verifierKeyId": "did:key:claims-reviewer-1",
+       "verifierPubKey": "gTl3Dqh9F19Wo1Rmw0x-zMuNipG07jeiXfYPW4_Js5Q"
+      }
+     },
+     "vr": {
+      "acceptanceSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "deliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+      "evidenceRefs": [
+       {
+        "hash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+        "type": "delivery-hash"
+       }
+      ],
+      "nonce": "n-replay",
+      "result": "PASS",
+      "resultVersion": "adp-verification/0.1",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "did:key:claims-reviewer-1",
+       "sig": "liYoeSTM7GGXTtuBDBFNmI94cA4oiMJKU0FmlIcBX_QdOJYZ7yqbjVZ-yf2Dxe6h1r7rlpXCw3n4wmydYsxwAA"
+      },
+      "timestamp": "2026-10-29T09:30:00Z",
+      "verifierId": "did:key:claims-reviewer-1"
+     }
+    }
+   ]
+  },
+  {
+   "description": "second result with a fresh nonce after the deal was consumed",
+   "id": "S24",
+   "steps": [
+    {
+     "actualDeliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+     "boundSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+     "consumeIfAllowed": true,
+     "evidencePolicy": "strict",
+     "expect": {
+      "decision": "ALLOWED"
+     },
+     "issuerPubKey": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w",
+     "requireProviderAck": null,
+     "spec": {
+      "acceptanceCondition": {
+       "expectedHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd"
+      },
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "evidenceRequirements": [
+       "delivery-hash"
+      ],
+      "issuer": "agent:insurer.example",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "agent:insurer.example",
+       "sig": "f96M3KzJiL-broz61q3Mg5j7UPpSVSPutuG5iQOG5x7ihr8SmPBRVrtPkxaX4yrCl9CSxt-e49_svgOCjULlCA"
+      },
+      "specVersion": "adp-acceptance/0.1",
+      "subjectHash": "246e6ee58390ced952f39391912d03dcfec36d7d60ed878ffc1f0afbf0adf49e",
+      "validity": {
+       "notAfter": "2026-10-29T10:00:00Z",
+       "notBefore": "2026-10-29T09:00:00Z"
+      },
+      "verificationMethod": {
+       "algorithm": "sha-256",
+       "canonicalization": "JCS-RFC8785",
+       "type": "hash-equals"
+      },
+      "verifierAuthorization": {
+       "mode": "designated-key",
+       "verifierKeyId": "did:key:claims-reviewer-1",
+       "verifierPubKey": "gTl3Dqh9F19Wo1Rmw0x-zMuNipG07jeiXfYPW4_Js5Q"
+      }
+     },
+     "vr": {
+      "acceptanceSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "deliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+      "evidenceRefs": [
+       {
+        "hash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+        "type": "delivery-hash"
+       }
+      ],
+      "nonce": "n-a",
+      "result": "PASS",
+      "resultVersion": "adp-verification/0.1",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "did:key:claims-reviewer-1",
+       "sig": "IiOiWdKoxS7MR8Jgqj3tosh7xlc0eOFWD3d886xTKRTpfhM8bANjSth4BQ8TQiaUqMS-wISimOdqgBl34w5pAA"
+      },
+      "timestamp": "2026-10-29T09:30:00Z",
+      "verifierId": "did:key:claims-reviewer-1"
+     }
+    },
+    {
+     "actualDeliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+     "boundSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+     "consumeIfAllowed": false,
+     "evidencePolicy": "strict",
+     "expect": {
+      "error": "ALREADY_SETTLED"
+     },
+     "issuerPubKey": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w",
+     "requireProviderAck": null,
+     "spec": {
+      "acceptanceCondition": {
+       "expectedHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd"
+      },
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "evidenceRequirements": [
+       "delivery-hash"
+      ],
+      "issuer": "agent:insurer.example",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "agent:insurer.example",
+       "sig": "f96M3KzJiL-broz61q3Mg5j7UPpSVSPutuG5iQOG5x7ihr8SmPBRVrtPkxaX4yrCl9CSxt-e49_svgOCjULlCA"
+      },
+      "specVersion": "adp-acceptance/0.1",
+      "subjectHash": "246e6ee58390ced952f39391912d03dcfec36d7d60ed878ffc1f0afbf0adf49e",
+      "validity": {
+       "notAfter": "2026-10-29T10:00:00Z",
+       "notBefore": "2026-10-29T09:00:00Z"
+      },
+      "verificationMethod": {
+       "algorithm": "sha-256",
+       "canonicalization": "JCS-RFC8785",
+       "type": "hash-equals"
+      },
+      "verifierAuthorization": {
+       "mode": "designated-key",
+       "verifierKeyId": "did:key:claims-reviewer-1",
+       "verifierPubKey": "gTl3Dqh9F19Wo1Rmw0x-zMuNipG07jeiXfYPW4_Js5Q"
+      }
+     },
+     "vr": {
+      "acceptanceSpecHash": "1450d987ebbe393ec2d24dee4f4b13dba18d3a392414d68c98e3ebedd026e25e",
+      "dealId": "3c1f6a52-7d0e-4b8a-9a52-6f2f0b1d7e33",
+      "deliveryHash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+      "evidenceRefs": [
+       {
+        "hash": "6bf9e1bff95ed16752a4da05b2715f8bb65265b147e159f3da28bcb56cfd87fd",
+        "type": "delivery-hash"
+       }
+      ],
+      "nonce": "n-b",
+      "result": "PASS",
+      "resultVersion": "adp-verification/0.1",
+      "signature": {
+       "alg": "EdDSA",
+       "kid": "did:key:claims-reviewer-1",
+       "sig": "JVzCbBtIUrbrimmbgKvIMH3du_RYYrfWKN0V5SSO_-fC-5VdU1wBwtzatfgsSaQkYFBxcUPPE7YaeSJtHTDpDQ"
+      },
+      "timestamp": "2026-10-29T09:30:00Z",
+      "verifierId": "did:key:claims-reviewer-1"
+     }
+    }
+   ]
+  }
+ ],
+ "vectorSet": "adp-0.1.2-payment-free-T3"
+}

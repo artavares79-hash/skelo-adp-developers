@@ -1,4 +1,4 @@
-﻿# Documentation repository only
+# ADP release repository
 .env
 .env.*
 *.key
@@ -8,3 +8,11 @@
 *.sqlite*
 *.db
 __pycache__/
+
+dist/
+build/
+node_modules/
+*.egg-info/
+packages/typescript/dist/
+out/
+out-node/
