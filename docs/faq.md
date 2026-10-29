@@ -16,9 +16,9 @@ When the repository is public, [open an evaluation request](https://github.com/a
 
 They are not provided here. A public self-service sandbox has **not** been enabled. Review the [official integration information](https://iamskelo.com/adp/connect.html) for the current access process.
 
-## Is the ADP source code open source?
+## Is ADP open source?
 
-No. This repository contains developer-facing documentation only. The proprietary ADP backend and its internal security implementation are not published.
+The **protocol specification** v0.1.2 is published for reading and review and is intended to be implementable independently. Licence terms for the text have not been decided yet; until they are published, no permission beyond reading is granted. The hosted ADP backend and its internal security implementation are not published.
 
 ## Isn't this just another AI quality checker?
 

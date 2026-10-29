@@ -1,15 +1,28 @@
 ﻿# Status and roadmap
 
+Current state of the protocol work:
+
+| Area | Available today? |
+|---|---|
+| **ADP Protocol** | Specification v0.1.2 (draft) and test vectors are published for reading and review. Licence terms for the text are not decided yet. No external review yet. |
+| **Reference implementations** (Python, TypeScript) | Exist and are tested internally; **not part of this publication**. |
+| **SKELO ADP Cloud** | **Planned. Not developed. Not available.** No date is promised. |
+
+## Separate: hosted sandbox / MCP service
+Implemented and internally validated; access by approval only; not self-service; not part of this publication.
+
+## Capability table
 | Capability | Implemented | Internally validated | Publicly available |
-| --- | --- | --- | --- |
-| Agreement and verification workflow | Yes | Yes | Product access is controlled |
-| Signed, deal-bound acceptance specification and provider acknowledgement | Yes | Yes | Product access is controlled |
-| Delivery binding, configured claim/evidence checks and signed eligibility result | Yes | Yes | Product access is controlled |
-| Production deployment | Yes | Yes | Not public self-service |
-| Authenticated remote MCP integration | Yes | Yes | Authorized integrations only |
+|---|---|---|---|
+| Agreement and verification workflow | Yes | Yes | Specification and vectors (v0.1.2) |
+| Payment-free profile | Yes | Yes | Specification and vectors |
+| Authenticated remote MCP integration | Yes | Yes | Authorised integrations only |
 | Public self-service sandbox | No release claimed | N/A | No |
-| Public source release | No | N/A | No |
+| Independent second implementation | No | N/A | No |
+| Reference transport / identity binding | No | N/A | No |
+| Cloud platform | No | N/A | No |
 
-SKELO may expand developer materials, evaluation paths, examples, and registry participation under an approved release plan. This repository does not promise dates, compatibility commitments, SDK releases, or public sandbox availability.
-
-A future MCP Registry listing may be useful after an explicit public, stable developer contract, support path, and distribution details are approved. Registry publication is not part of this release.
+## Direction (no dates, no commitments)
+- External review of the specification and threat model; independent implementations.
+- Reference bindings for transport and identity (for example `did:key`, A2A/HTTP).
+- Publication of further materials once open questions are settled.

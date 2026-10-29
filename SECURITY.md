@@ -1,9 +1,24 @@
-﻿# Security
+# Security policy
 
-ADP is designed to preserve the relationship between a deal, its agreed acceptance criteria, submitted delivery, and resulting verification. This public documentation does not disclose private keys, credentials, production configuration, private test vectors, or implementation-specific defensive details.
+## Reporting a vulnerability
 
-Integrators must protect issued credentials, begin with synthetic data, secure their own agents and downstream systems, and decide whether and how a verification outcome affects a business process.
+Do **not** open a public issue for a suspected vulnerability.
 
-ADP does not custody or transfer funds, control payment systems, or guarantee factual truth beyond agreed verification criteria. It is not a substitute for an integrator’s security review, identity controls, compliance process, or payment controls.
+Use GitHub **private vulnerability reporting** for this repository (*Security → Report a vulnerability*). Please include: affected component and version, impact, minimal reproduction, and whether you intend to disclose publicly.
 
-For a suspected vulnerability, do not open a public issue or include sensitive data. Use SKELO’s official contact path to request a secure reporting channel.
+This is a small project: there is no SLA and no bounty. Reports are handled on a best-effort basis.
+
+## Scope
+
+In scope: the specification (design flaws that break its stated guarantees, e.g. canonicalisation, signature, hash-chain or replay issues) and the published conformance data.
+Out of scope: the hosted sandbox/MCP service at iamskelo.com (see the contact route on that site), third-party dependencies, and social-engineering or physical attacks.
+
+## Security model in one paragraph
+
+ADP proves *who* signed *which* terms, verdict and delivery hash, in *which* order, and refuses a second release of the same deal. It does **not** authenticate parties (key distribution is yours), protect private keys, or prove that a delivery is correct or a verifier honest. See [`docs/responsibilities.md`](docs/responsibilities.md) and spec §15 (threat model).
+
+## Known limitations (draft)
+
+* The threat model (spec §15) has **not** been reviewed by an independent security reviewer.
+* There is no independent second implementation yet.
+* The example keys in the test vectors are public and **insecure by design**; never use them.
