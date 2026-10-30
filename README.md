@@ -8,6 +8,26 @@ The **Agent Deal Protocol (ADP)** is a small, payment-independent protocol for e
 
 ADP is **not** a payment rail, escrow service, identity authority, transport, or truth oracle. **It works completely without payments** (the *payment-free profile*, spec §17). Where money is involved, payment systems can be bound to it from the outside.
 
+## Try ADP now — free public MCP sandbox
+
+**No account, password, API key or OAuth required.** Add this remote MCP server to a compatible AI client:
+
+```text
+https://iamskelo.com/adp/mcp-public
+```
+
+For example, in Claude Web, add a custom connector using that URL and connect without authentication. Then ask your agent:
+
+> Use the SKELO ADP tools to create a synthetic test deal, read it, acknowledge the frozen terms, submit a test delivery and retrieve its verification result. Use no personal or customer data.
+
+Available tools: `adp_create_deal`, `adp_read_deal`, `adp_acknowledge_deal`, `adp_submit_delivery`, `adp_get_verification`.
+
+See the [quickstart](docs/getting-started.md), [MCP integration guide](docs/mcp-integration.md), and [live activity monitor](https://iamskelo.com/adp/activity). The sandbox uses isolated, temporary test deals and usage limits. **External URL retrieval is disabled for public-sandbox verification**; unavailable source checks are marked accordingly, not presented as verified.
+
+**Observed integration test (30 October 2026):** A Claude Web custom connector completed all five MCP tools with a synthetic test deal, resulting in PASS / ELIGIBLE for the configured structural checks. This was SKELO's own test through Anthropic infrastructure, **not independent external validation, a certification, or a partnership**. PASS does not establish factual truth or a payment.
+
+The separate `/adp/mcp` endpoint remains protected for authorized integrations.
+
 ## Current version: v0.1.2 (draft)
 
 | Item | Status |
@@ -15,7 +35,8 @@ ADP is **not** a payment rail, escrow service, identity authority, transport, or
 | **Specification v0.1.2 (English)** | [`spec/ADP-v0.1.2-EN.md`](spec/ADP-v0.1.2-EN.md) — draft, published for reading and review |
 | **Test vectors** | [`conformance/`](conformance) — language-neutral payment-free vectors (JSON) and the v0.1.1 vector set |
 | **Documentation** | [`docs/`](docs) — workflow, responsibilities, conformance, versioning, FAQ, status |
-| **Hosted sandbox / MCP service** | Separate, access by approval only — [iamskelo.com/adp/connect.html](https://iamskelo.com/adp/connect.html) |
+| **Public hosted MCP sandbox** | [Try without login](https://iamskelo.com/adp/mcp-public) — synthetic tests only |
+| **Authorized hosted MCP integration** | Separate protected endpoint — [integration information](https://iamskelo.com/adp/connect.html) |
 | **SKELO ADP Cloud** | Planned. Not built. Not available. |
 
 Terms of use for the published material have **not been decided yet**. Until they are published, no permission beyond reading is granted. Nothing here is an offer.
