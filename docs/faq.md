@@ -2,58 +2,56 @@
 
 ## Is ADP real or only a concept?
 
-The agreement-and-verification workflow has been implemented and internally validated. A production deployment is in place. The authenticated remote MCP integration is also implemented and internally validated.
+The agreement-and-verification workflow and remote MCP integration are implemented. The public sandbox has been tested using an actual Claude Web connector.
 
-## Can I connect any MCP client today?
+## Can I connect an MCP client today?
 
-There is **no public self-service access**. Connection requires authorization, and supported capabilities depend on the session and the connection details supplied after approval. Compatibility with an arbitrary client is not promised.
+**Yes, if your client supports the public remote MCP endpoint.** Add `https://iamskelo.com/adp/mcp-public` with no authentication. Claude Web was successfully tested on 30 October 2026. Other clients may have different connector requirements; universal compatibility is not guaranteed.
 
-## How do I express interest in an external evaluation?
+## Where are the public API keys?
 
-When the repository is public, [open an evaluation request](https://github.com/artavares79-hash/skelo-adp-developers/issues/new?template=integration-interest.yml) using synthetic, non-confidential use-case details. You may also review [SKELO's official integration information](https://iamskelo.com/adp/connect.html). Requests do not guarantee immediate approval or a specific response time.
+**You do not need any.** The [public MCP sandbox](https://iamskelo.com/adp/mcp-public) requires no account, password, API key or OAuth. Use synthetic data only. Protected production integrations require separate authorization.
 
-## Where are the public API keys and test endpoint?
+## How do I request a protected integration?
 
-They are not provided here. A public self-service sandbox has **not** been enabled. Review the [official integration information](https://iamskelo.com/adp/connect.html) for the current access process.
+For non-confidential use-case details, [open an evaluation request](https://github.com/artavares79-hash/skelo-adp-developers/issues/new?template=integration-interest.yml) or review [SKELO's integration information](https://iamskelo.com/adp/connect.html). Approval is not guaranteed.
 
 ## Is ADP open source?
 
-The **protocol specification** v0.1.2 is published for reading and review and is intended to be implementable independently. Licence terms for the text have not been decided yet; until they are published, no permission beyond reading is granted. The hosted ADP backend and its internal security implementation are not published.
+The **protocol specification** v0.1.2 is published for reading and review. Licence terms for the text have not been decided yet; until they are published, no permission beyond reading is granted. The hosted backend and its internal security implementation are not published.
 
 ## Isn't this just another AI quality checker?
 
-No. ADP starts **before** the provider delivers anything: it binds an explicit, signed acceptance specification and verification policy to a particular deal. The provider acknowledges those exact terms. The later delivery is checked against that original agreement, rather than being scored against requirements invented after the result arrives.
-
-Unlike a generic after-the-fact validator, ADP also enforces protocol binding requirements, including rejecting a delivery with no valid provider acknowledgement or a mismatched specification. This is a statement about **ADP's documented capabilities**, not a claim that no other product offers overlapping features.
+No. ADP starts **before** delivery: it binds a signed acceptance specification and verification policy to a deal, and the provider acknowledges those terms. Delivery is checked against the original agreement rather than requirements invented afterwards.
 
 ## Can a provider change the conditions after accepting a deal?
 
-A delivery referring to different or modified bound terms does not silently replace the originally accepted specification. ADP checks the deal and specification binding. An external business relationship still requires its own identity, access, consent and legal controls.
+A delivery referring to modified bound terms does not silently replace the accepted specification. External relationships still require their own identity, access, consent and legal controls.
 
-## Does ELIGIBLE mean all the work is factually correct?
+## Does ELIGIBLE mean the work is factually correct?
 
-No. ADP distinguishes supported checks from claims that cannot be objectively verified. Depending on the agreed policy, an outcome containing unverifiable claims **can still be eligible** when mandatory objective checks pass. External systems must apply any stricter truth, quality, compliance or approval requirements appropriate for their business.
+No. ADP distinguishes supported objective checks from claims that cannot be verified. The public sandbox disables external URL retrieval, so source-dependent checks are marked unverifiable. ELIGIBLE can still occur when mandatory checks pass; downstream systems must impose any stricter quality requirements.
 
-## Can ADP guarantee that a payment won't happen before verification?
+## Can ADP guarantee a payment won't happen before verification?
 
-No. ADP **does not control external payment rails**. It supplies a signed verification and eligibility outcome. The payment or workflow integrator must authenticate that result and enforce a genuine release gate; otherwise actions outside ADP remain possible.
+No. ADP **does not control external payment rails**. A payment or workflow integrator must authenticate the result and enforce any real release gate.
 
 ## Does ADP make payments or hold money?
 
-No. ADP can produce a verification or settlement-eligibility outcome. A separate external system remains responsible for any transaction or action.
+No. ADP can produce a verification or eligibility outcome; a separate system performs any transaction.
 
-## Can ADP guarantee the quality or factual accuracy of AI-generated work?
+## Can ADP guarantee factual accuracy?
 
-No. Its verification result applies to the criteria and evidence checks established for a particular agreement. Requiring a citation does not automatically prove that the citation is true.
+No. Its verification applies only to the criteria and evidence checks established for a particular agreement.
 
-## Does MCP mean the protocol itself was built by the MCP project?
+## Does MCP mean ADP was built by the MCP project?
 
-No. MCP is an integration interface through which an authorized compatible agent can interact with tools exposed by ADP. ADP's agreement and verification rules are distinct from MCP.
+No. MCP is an interface through which compatible agents use ADP tools. ADP's agreement and verification rules are separate.
 
-## Can I try an example without access?
+## Can I try ADP without approval?
 
-You can read the [synthetic examples](examples.md) and [protocol workflow](protocol-workflow.md). They illustrate the workflow but are **not** executable requests to a public ADP service.
+**Yes.** Add `https://iamskelo.com/adp/mcp-public` to a compatible MCP client without authentication, and follow the [getting-started guide](getting-started.md). Watch anonymized activity at [ADP Live Activity](https://iamskelo.com/adp/activity). The public test deals are temporary and rate-limited.
 
 ## Can I report a problem or suggest improvements?
 
-For non-sensitive feedback, follow [Support and feedback](support-and-feedback.md). Do not post credentials, customer data, production payloads or vulnerability details in public issues.
+For non-sensitive feedback, follow [Support and feedback](support-and-feedback.md). Never post credentials, customer data or vulnerability details in public issues.
