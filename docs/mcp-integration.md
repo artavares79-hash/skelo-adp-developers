@@ -1,43 +1,50 @@
 # MCP integration
 
-**MCP is how an authorized compatible client can talk to ADP. ADP is the agreement-and-verification layer behind it.**
+**MCP lets compatible AI clients interact with ADP's agreement-and-verification tools.**
 
-## Current availability
+## Public sandbox — try without signing up
 
-- **Implemented:** authenticated remote MCP integration.
-- **Validated:** internally tested by SKELO against the production-compatible deployment.
-- **Deployment:** production deployment in place.
-- **External access:** controlled and subject to authorization.
-- **Public self-service sandbox:** not enabled.
+Remote MCP endpoint:
 
-A finished integration is not the same as a public endpoint anyone can use. No public token, connection URL or instant self-service test access is supplied by this repository.
+```text
+https://iamskelo.com/adp/mcp-public
+```
+
+No registration, password, API key or OAuth is required for this **public synthetic-data sandbox**.
+
+In Claude Web, add a custom MCP connector with the URL above and no authentication. Other MCP clients may support equivalent remote-server configuration; compatibility varies by client.
+
+Discover and call these five tools:
+
+1. `adp_create_deal` — create a test deal with frozen acceptance terms.
+2. `adp_read_deal` — read back the deal and its bound criteria.
+3. `adp_acknowledge_deal` — acknowledge the exact terms.
+4. `adp_submit_delivery` — submit a synthetic delivery.
+5. `adp_get_verification` — retrieve the verdict and eligibility result.
+
+Example prompt:
+
+> Connect to the SKELO ADP public sandbox. Using only synthetic data, create a small test deal, read its terms, acknowledge it, submit a matching delivery and retrieve the verification verdict. Explain what each result means.
+
+**Sandbox limits:** isolated, temporary test deals; per-source and global request/deal limits; no customer or production data. Public test deals are automatically cleaned up after approximately 24 hours. External URL retrieval is disabled for public-sandbox verification: source-dependent claims are marked unverifiable (`RETRIEVAL_DISABLED_PUBLIC_SANDBOX`) rather than asserted as checked. A PASS or ELIGIBLE result applies to the actual configured checks; it is not proof of factual accuracy or payment.
+
+Watch anonymized events at the [live activity monitor](https://iamskelo.com/adp/activity). Events are delayed by approximately 60 seconds. The origin label `unclassified` does **not** establish that a visitor is independent or external.
+
+**Observed test, 30 October 2026:** SKELO connected Claude Web to the public endpoint, completed all five tools and received PASS / ELIGIBLE on a synthetic structural-check deal. This is an operator-run integration test via Anthropic infrastructure, **not independent third-party validation or a partnership**.
+
+## Protected integrations
+
+The separate `https://iamskelo.com/adp/mcp` endpoint is protected and supports authorized integrations. Its authentication is not required for the public sandbox. For production integration details, see [SKELO's integration information](https://iamskelo.com/adp/connect.html).
 
 ## What the integration is for
 
-The MCP interface is an entry point to ADP's **entire agreement-to-verification lifecycle**, not merely an after-the-fact scoring endpoint:
+The MCP interface covers ADP's **agreement-to-verification lifecycle**, not merely after-the-fact scoring:
 
-1. Establish the deal and explicit acceptance terms **before execution**, with a signed, deal-bound specification and verification policy.
+1. Establish explicit acceptance terms **before execution**, with a signed, deal-bound specification and verification policy.
 2. Obtain the provider's acknowledgement of the exact specification and policy.
-3. Bind a later delivery and its evidence to those original conditions.
-4. Receive a signed verification and eligibility outcome; the integrating workflow makes and enforces any actual downstream decision.
+3. Bind delivery and evidence to the original conditions.
+4. Receive verification and eligibility outcomes; the integrating workflow enforces any downstream decision.
 
-The adapter does **not** make external systems automatically withhold payment or prove factual truth. The consuming system is responsible for authorization, confidentiality and release gating.
+ADP does **not** make external systems withhold payment or prove factual truth. Clients and integrating systems remain responsible for agent behavior, credentials (when applicable), content validation, user permissions and downstream actions.
 
-## What happens in an authorized integration?
-
-1. A developer reviews ADP's [workflow](protocol-workflow.md) and [use cases](use-cases.md).
-2. An authorized evaluation is requested through [SKELO's integration information](https://iamskelo.com/adp/connect.html).
-3. If approved, the developer receives the specific endpoint, authentication requirements and supported protocol instructions through the approved channel.
-4. The client establishes an authenticated MCP session and discovers the tools available to that session.
-5. Synthetic positive and negative test cases are run before any business workflow is attached.
-6. The developer's own system decides how to act on ADP's verification result.
-
-## Responsibilities and limits
-
-**ADP:** Applies its agreement and verification rules to the submitted claims and evidence, subject to the agreed checks.
-
-**The MCP client and integrating system:** Handle agent behavior, credential protection, input and output handling, additional content validation, user permissions, and any downstream decision or payment.
-
-**This repository:** Supplies a conceptual integration guide. It does not publish backend implementation, credentials, environment-specific endpoints, private test vectors, or tool schemas that have not been approved as a public contract.
-
-For a first look, see [Getting started](getting-started.md), [synthetic examples](examples.md) and the [FAQ](faq.md).
+This repository publishes protocol documentation and testing instructions, **not** the private hosted backend or secrets. For more context, see [Getting started](getting-started.md), [examples](examples.md) and [FAQ](faq.md).
