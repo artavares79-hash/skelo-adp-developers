@@ -69,3 +69,13 @@ ADP does not transport messages, identify parties, manage keys, decide who may a
 | Background | [workflow](docs/protocol-workflow.md), [use cases](docs/use-cases.md), [FAQ](docs/faq.md), [MCP integration](docs/mcp-integration.md), [status and roadmap](docs/status-and-roadmap.md) |
 
 **Official website:** [iamskelo.com/protocol](https://iamskelo.com/protocol) · [iamskelo.com/adp](https://iamskelo.com/adp/)
+
+## Experimental evidence replay and Sui Testnet anchoring (not production)
+
+An **isolated development workspace** has been used to prototype **Evidence Replay V1**, implementation-level **verification policy v5**, and optional **Sui Testnet hash anchoring**. These are **not part of the public v0.1.2 normative specification**, and are **not deployed on the public MCP sandbox**. The public sandbox's external-URL retrieval restrictions still apply.
+
+The development team's reported results include real Claude-agent integration exercises, offline verification of hash-chained replay exports, tamper detection, and Sui **Testnet** transactions. These results were reported from private test workspaces; **the corresponding source code and complete test artifacts are not published in this repository, and the results have not been independently audited**. No Mainnet integration or production availability is claimed.
+
+For the evidence boundary, recorded events can demonstrate integrity of what was captured; they do **not** prove that every action was captured or that agent assertions are true. A separate blockchain anchor can help detect later replacement of a locally re-signed record, but cannot recover deleted evidence or establish semantic truth. Sui Testnet data persistence is not guaranteed.
+
+Read the [experimental status, evidence and limitations](docs/experimental-replay-sui-testnet.md). Developers should **not** treat the published v0.1.2 conformance vectors as tests of the experimental replay or Sui implementation.
