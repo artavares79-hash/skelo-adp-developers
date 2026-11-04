@@ -8,6 +8,7 @@ Current state of the protocol work:
 | **Reference implementations** (Python, TypeScript) | Exist and tested internally; **not part of this publication**. |
 | **Public MCP test sandbox** | **Live:** [no-auth test endpoint](https://iamskelo.com/adp/mcp-public) for synthetic deals. |
 | **Protected MCP integration** | Deployed; requires authorization. |
+| **Optional Evidence Replay anchor** | Isolated mechanism tested with synthetic data on Sui Testnet; not integrated into the production recorder. |
 | **SKELO ADP Cloud** | **Planned. Not developed. Not available.** No date promised. |
 
 ## Hosted sandbox / MCP service
@@ -24,6 +25,7 @@ On 30 October 2026, SKELO successfully ran all five tools via a Claude Web conne
 | Payment-free profile | Yes | Yes | Specification and vectors |
 | Authenticated remote MCP integration | Yes | Yes | Authorised integrations only |
 | Public self-service MCP sandbox | Yes | Yes; Claude Web integration tested | Yes, synthetic tests only |
+| Evidence Replay with optional Sui anchor | Yes, isolated build | Yes, synthetic Sui Testnet checks | Documentation and test transaction only; no production enrolment |
 | Independent second implementation | No | N/A | No |
 | Reference transport / identity binding | No | N/A | No |
 | Cloud platform | No | N/A | No |
@@ -33,3 +35,4 @@ On 30 October 2026, SKELO successfully ran all five tools via a Claude Web conne
 - External review of the specification and threat model; independent implementations.
 - Reference bindings for transport and identity (for example `did:key`, A2A/HTTP).
 - Publication of further materials once open questions are settled.
+- Production review for recorder/witness operation, key custody, backup custody and retention before any Sui Mainnet decision.

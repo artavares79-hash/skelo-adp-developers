@@ -37,6 +37,7 @@ The separate `/adp/mcp` endpoint remains protected for authorized integrations.
 | **Documentation** | [`docs/`](docs) — workflow, responsibilities, conformance, versioning, FAQ, status |
 | **Public hosted MCP sandbox** | [Try without login](https://iamskelo.com/adp/mcp-public) — synthetic tests only |
 | **Authorized hosted MCP integration** | Separate protected endpoint — [integration information](https://iamskelo.com/adp/connect.html) |
+| **Optional Sui anchoring** | Tested on Sui Testnet with synthetic replay-anchor data — [technical details](docs/sui-integration.md) |
 | **SKELO ADP Cloud** | Planned. Not built. Not available. |
 
 Terms of use for the published material have **not been decided yet**. Until they are published, no permission beyond reading is granted. Nothing here is an offer.
@@ -51,6 +52,14 @@ Terms of use for the published material have **not been decided yet**. Until the
 6. **Record.** A DealRecord with a hash chain closes the deal as `SETTLED` or `REJECTED`. Anyone can re-verify it with only the exchanged files and the parties' public keys.
 
 "Released" means: the work is proven to meet the agreed terms and may be acted upon. ADP moves nothing; your application performs the follow-up.
+
+## Optional Sui Testnet anchoring
+
+Evidence Replay can produce a signed checkpoint over its hash-chained event record. An optional, separate publisher can batch checkpoint digests into a Merkle root and write only that root and a version tag to Sui. A verifier then checks the local replay package, its recorder signature, the Merkle proof and the pinned Sui Testnet transaction.
+
+The mechanism was exercised with synthetic data on **Sui Testnet**. Transaction [`9X3MukSDen2cgnaN1c9ijCSVxYGtEV3ZE1o13HNmL8L8`](https://suiscan.xyz/testnet/tx/9X3MukSDen2cgnaN1c9ijCSVxYGtEV3ZE1o13HNmL8L8) confirmed batch root `f32a2af1ff4a747815feef399eaa65fe71a0478b888b175e98c4f9cf693d1601`. This proves that the committed digest existed no later than the testnet checkpoint; it does not prove that recorded statements are true or that every action was observed.
+
+This is a testnet development result. Sui Mainnet publishing, production recorder integration, payments and public replay access are not active. See [Sui integration and independent verification](docs/sui-integration.md) for the exact trust and privacy boundaries.
 
 ## What ADP does not do
 
@@ -67,5 +76,6 @@ ADP does not transport messages, identify parties, manage keys, decide who may a
 | [Changelog](CHANGELOG.md) · [Release notes 0.1.2](RELEASE-NOTES-0.1.2.md) | |
 | [Security policy](SECURITY.md) | |
 | Background | [workflow](docs/protocol-workflow.md), [use cases](docs/use-cases.md), [FAQ](docs/faq.md), [MCP integration](docs/mcp-integration.md), [status and roadmap](docs/status-and-roadmap.md) |
+| Sui Testnet | [optional replay-anchor integration and verification](docs/sui-integration.md) |
 
 **Official website:** [iamskelo.com/protocol](https://iamskelo.com/protocol) · [iamskelo.com/adp](https://iamskelo.com/adp/)
