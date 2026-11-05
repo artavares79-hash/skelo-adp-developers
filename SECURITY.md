@@ -22,3 +22,8 @@ ADP proves *who* signed *which* terms, verdict and delivery hash, in *which* ord
 * The threat model (spec §15) has **not** been reviewed by an independent security reviewer.
 * There is no independent second implementation yet.
 * The example keys in the test vectors are public and **insecure by design**; never use them.
+
+
+## External Verifier V1 publication
+
+The published extension, selected primitives, schemas and client examples are in repository security scope. They are staging reference material requiring the documented host contracts; no standalone production server or real keys are distributed. Report vulnerabilities privately. Never assume the hosted endpoint has a staging feature enabled. TEST profiles require durable server enrollment plus private policy; an operator credential, forged identity header or free-text TEST label must never substitute for that gate. Once TEST grants exist, rollback must preserve profile markers and authorization guards. See [integration boundaries](docs/external-verifier-v1.md).

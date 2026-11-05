@@ -1,0 +1,41 @@
+{
+  "publication": "v1-staging-2026-11-05",
+  "productionActivated": false,
+  "files": {
+    "reference/external_verifier_v1/external_verification.py": {
+      "sha256": "ac3ef7149b2699ee583547caed3e5e3e4c772716c82e31a1398e5cbf625b0dd0",
+      "stagingSourceSha256": "e23889f57f4f33bae140979066986beac04b3f8e2da622bef4b230ff26299151",
+      "origin": "Actual tested staging module; UTF-8 source with LF line endings, no logic changes."
+    },
+    "reference/external_verifier_v1/test_verifier_access.py": {
+      "sha256": "0b0eba5c36c7438787d68124b05447ceda88f9953b9cc17f3d3787d4cb7b75b6",
+      "stagingSourceSha256": "0b0eba5c36c7438787d68124b05447ceda88f9953b9cc17f3d3787d4cb7b75b6",
+      "origin": "Actual tested staging module; UTF-8 source with LF line endings, no logic changes."
+    },
+    "reference/adp/canonical.py": {
+      "sha256": "bee137bbad1564b0f7e7de48e3fcbc419278e3c1153cf84213a6d2cfc6a8fe12",
+      "stagingSourceSha256": "bee137bbad1564b0f7e7de48e3fcbc419278e3c1153cf84213a6d2cfc6a8fe12",
+      "origin": "Selected existing ADP primitive, LF-normalized source with no logic changes. Not the complete v0.1.2 implementation."
+    },
+    "reference/adp/crypto.py": {
+      "sha256": "b7d419ba9d3e8f86550c685a1663c82a91b9cb1d62dc810fd54177d7765bb029",
+      "stagingSourceSha256": "b7d419ba9d3e8f86550c685a1663c82a91b9cb1d62dc810fd54177d7765bb029",
+      "origin": "Selected existing ADP primitive, LF-normalized source with no logic changes. Not the complete v0.1.2 implementation."
+    },
+    "reference/adp/errors.py": {
+      "sha256": "f763bbbea60618d4afd0e74e120a1ae3616344c2dfebaaff21adcf0fc9d9e11b",
+      "stagingSourceSha256": "f763bbbea60618d4afd0e74e120a1ae3616344c2dfebaaff21adcf0fc9d9e11b",
+      "origin": "Selected existing ADP primitive, LF-normalized source with no logic changes. Not the complete v0.1.2 implementation."
+    },
+    "reference/adp/models.py": {
+      "sha256": "e6217ba1a01f0591aa2a6564f583a98b89103c8b893e7ac977ba94157888bcf8",
+      "stagingSourceSha256": "e6217ba1a01f0591aa2a6564f583a98b89103c8b893e7ac977ba94157888bcf8",
+      "origin": "Selected existing ADP primitive, LF-normalized source with no logic changes. Not the complete v0.1.2 implementation."
+    },
+    "reference/adp/settlement.py": {
+      "sha256": "5b97a52c39d746aaa01bcdffced37e198519dc370c79e315ddde565768389b27",
+      "stagingSourceSha256": "5b97a52c39d746aaa01bcdffced37e198519dc370c79e315ddde565768389b27",
+      "origin": "Selected existing ADP primitive, LF-normalized source with no logic changes. Not the complete v0.1.2 implementation."
+    }
+  }
+}

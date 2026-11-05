@@ -1,0 +1,28 @@
+{
+  "publication": "v1-staging-2026-11-05",
+  "productionActivated": false,
+  "portableContractTests": 45,
+  "stagingTests": {
+    "authorization": 52,
+    "regression": 98
+  },
+  "stagingEndToEnd": {
+    "checks": 42,
+    "testClientMcpCalls": 32,
+    "testClientToolCalls": 28,
+    "operatorApiCalls": 24,
+    "compatibilityMcpCalls": 3,
+    "oauth": "Real local HTTP discovery, DCR, consent, redirect callback, PKCE, token, refresh and revoke",
+    "independence": "Separate processes on same host/account; not an external professional audit"
+  },
+  "outcomes": {
+    "positive": "PASS / ALLOWED",
+    "negative": "FAIL / DENIED",
+    "missing": "NOT_VERIFIABLE / DENIED",
+    "contradictory": "CONFLICT / DENIED",
+    "manipulated": "INVALID_VERIFICATION, no stored result, DENIED"
+  },
+  "publicTestsScope": "Actual published modules with synthetic host-contract bindings; not a standalone private-host deployment test",
+  "excluded": "Real keys/identities, OAuth tokens/grant IDs, operational configs, raw run traces, private server paths, customer data, backups and wallet material",
+  "sourceLogicComparison": "Published modules/core primitives match staging AST; LF normalization only"
+}

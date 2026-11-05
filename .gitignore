@@ -16,3 +16,11 @@ node_modules/
 packages/typescript/dist/
 out/
 out-node/
+
+.pytest_cache/
+.coverage
+*.dpapi
+*backup*.enc.json
+*seed*
+*token*.json
+test-results/

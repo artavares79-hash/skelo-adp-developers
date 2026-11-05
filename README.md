@@ -28,7 +28,13 @@ See the [quickstart](docs/getting-started.md), [MCP integration guide](docs/mcp-
 
 The separate `/adp/mcp` endpoint remains protected for authorized integrations.
 
-## Current version: v0.1.2 (draft)
+## External Verifier V1 — published staging reference
+
+New deals can bind an approved specialist key and mandatory scope, accept signed external results through authenticated MCP/API, and combine structural and specialist checks in a fail-closed release gate. TEST grants are restricted server-side to explicitly approved signed synthetic deals and allowed tools. The [actual extension modules](reference/README.md), [integration contract](docs/external-verifier-v1.md), [MCP schema](schemas/external-verifier-v1-mcp.json), [OpenAPI contract](schemas/external-verifier-v1.openapi.json), [Python example](examples/python/external_verifier_client.py) and automated contract tests are published for review.
+
+**Snapshot: `v1-staging-2026-11-05`. Not enabled on the hosted production service.** Existing public MCP retains five tools; `adp_submit_verification` is an authenticated staging-candidate tool. Staging passed 52 security + 98 regression checks and a separate-process OAuth/MCP test with 42 checks. This publication does not deploy the backend, enable Policy v5/production Replay/Sui publishing, or move funds. The specification remains v0.1.2 draft; existing wire versions and historical deals are unchanged.
+
+## Current specification version: v0.1.2 (draft)
 
 | Item | Status |
 |---|---|
@@ -38,6 +44,7 @@ The separate `/adp/mcp` endpoint remains protected for authorized integrations.
 | **Public hosted MCP sandbox** | [Try without login](https://iamskelo.com/adp/mcp-public) — synthetic tests only |
 | **Authorized hosted MCP integration** | Separate protected endpoint — [integration information](https://iamskelo.com/adp/connect.html) |
 | **Optional Sui anchoring** | Tested on Sui Testnet with synthetic replay-anchor data — [technical details](docs/sui-integration.md) |
+| **External Verifier V1** | [Implemented staging profile and public extension](docs/external-verifier-v1.md); no hosted production activation |
 | **SKELO ADP Cloud** | Planned. Not built. Not available. |
 
 Terms of use for the published material have **not been decided yet**. Until they are published, no permission beyond reading is granted. Nothing here is an offer.
@@ -77,5 +84,6 @@ ADP does not transport messages, identify parties, manage keys, decide who may a
 | [Security policy](SECURITY.md) | |
 | Background | [workflow](docs/protocol-workflow.md), [use cases](docs/use-cases.md), [FAQ](docs/faq.md), [MCP integration](docs/mcp-integration.md), [status and roadmap](docs/status-and-roadmap.md) |
 | Sui Testnet | [optional replay-anchor integration and verification](docs/sui-integration.md) |
+| External Verifier V1 | [application profile, reference code and security boundaries](docs/external-verifier-v1.md) |
 
 **Official website:** [iamskelo.com/protocol](https://iamskelo.com/protocol) · [iamskelo.com/adp](https://iamskelo.com/adp/)

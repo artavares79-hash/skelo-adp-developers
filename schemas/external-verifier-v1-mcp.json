@@ -1,0 +1,473 @@
+{
+  "publication": "v1-staging-2026-11-05",
+  "availability": "Authenticated STAGING candidate only; not active on hosted production endpoints.",
+  "transportProtocolVersion": "2025-11-25",
+  "tools": [
+    {
+      "name": "adp_create_deal",
+      "description": "Create a new ADP deal. Call this FIRST, before any work is done. Provide `request` (a natural-language description of what you were asked to do, kept for the record) and, optionally, `criteria` -- explicit, checkable acceptance criteria (requiredItemCount, sourcesRequired, minSourceCount, outputLanguage). If you omit `criteria`, a reasonable default is applied (3 items, sources required, minimum 2 sources) -- always read the returned AcceptanceSpec with adp_read_deal-equivalent data in this response to see the EXACT criteria that were actually frozen; do not assume. The response includes `acceptanceSpecHashFull`: you MUST copy this value exactly (byte for byte) into every later call that requires `acceptance_spec_hash` -- never retype or paraphrase it. The response also includes the versioned, deal-bound `verificationSettlementPolicy` and `policyHash`; inspect both before acknowledgement. Next step after this: acknowledge the deal with adp_acknowledge_deal before doing any work. One active deal is allowed per logical owner; complete it before creating another. Active-deal and public creation-quota rejections are tool results with isError=true and code RATE_LIMITED; recovery metadata identifies the limit.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "request": {
+            "type": "string",
+            "description": "Natural-language description of the requested task."
+          },
+          "criteria": {
+            "type": "object",
+            "description": "Optional explicit acceptance criteria overriding the defaults.",
+            "properties": {
+              "requiredItemCount": {
+                "type": "integer"
+              },
+              "sourcesRequired": {
+                "type": "boolean"
+              },
+              "minSourceCount": {
+                "type": "integer"
+              },
+              "outputLanguage": {
+                "type": "string"
+              },
+              "claims": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Explicit claims requiring evidence verification."
+              }
+            }
+          },
+          "externalVerifier": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "verifierId",
+              "publicKey",
+              "scope"
+            ],
+            "properties": {
+              "verifierId": {
+                "type": "string"
+              },
+              "publicKey": {
+                "type": "string"
+              },
+              "scope": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 10,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "id",
+                    "description"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "supersedesDealId": {
+                "type": "string"
+              }
+            },
+            "description": "Authenticated only. Operator-approved Ed25519 verifier and mandatory professional scope frozen into the signed agreement. Put professional criteria here, not only in request text. No automatic settlement until all mandatory external criteria and structural checks PASS. A re-review requires a new acknowledged linked deal with changed delivery."
+          }
+        },
+        "required": [
+          "request"
+        ]
+      }
+    },
+    {
+      "name": "adp_read_deal",
+      "description": "Read back the current state and frozen AcceptanceSpec of an existing deal by `deal_id`. Use this to confirm the exact criteria and the exact `acceptanceSpecHashFull` before you acknowledge or deliver -- never rely on a value you remember from an earlier turn without re-checking it here if there is any doubt.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "deal_id": {
+            "type": "string",
+            "description": "Preferred tool input: copy the `dealId` field returned by create/read."
+          },
+          "dealId": {
+            "type": "string",
+            "description": "Backward-compatible alias for deal_id; supply only one identifier."
+          }
+        },
+        "anyOf": [
+          {
+            "required": [
+              "deal_id"
+            ]
+          },
+          {
+            "required": [
+              "dealId"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "adp_acknowledge_deal",
+      "description": "Acknowledge the EXACT frozen AcceptanceSpec before doing any work. You MUST call this before adp_submit_delivery -- a delivery submitted without a prior acknowledgement is rejected (REJECT_DELIVERY with state DELIVERY_REJECTED, a tool error). `acceptance_spec_hash` must be the exact, full hash value from adp_create_deal or adp_read_deal -- not shortened, not altered. `policy_hash` must exactly match the deal-bound verificationSettlementPolicy.policyHash returned by create/read; it records acknowledgement of the disclosed settlement policy. `provider_name` identifies you as the executing agent (e.g. your own name). You do NOT decide pass/fail at any point -- ADP verifies the delivery independently after you submit it. Next step after this: do the actual work, then call adp_submit_delivery. Identical ACK replay returns the original signed ACK without changing its timestamp; dealState reports the current lifecycle.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "deal_id": {
+            "type": "string",
+            "description": "Preferred input: copy response.dealId exactly."
+          },
+          "dealId": {
+            "type": "string",
+            "description": "Backward-compatible alias for deal_id."
+          },
+          "provider_name": {
+            "type": "string"
+          },
+          "acceptance_spec_hash": {
+            "type": "string",
+            "description": "The exact full AcceptanceSpec hash, copied verbatim."
+          },
+          "policy_hash": {
+            "type": "string",
+            "description": "Exact deal-bound verificationSettlementPolicy.policyHash from create/read."
+          }
+        },
+        "required": [
+          "provider_name",
+          "acceptance_spec_hash",
+          "policy_hash"
+        ],
+        "anyOf": [
+          {
+            "required": [
+              "deal_id"
+            ]
+          },
+          {
+            "required": [
+              "dealId"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "adp_submit_delivery",
+      "description": "Submit your completed work for this deal. You must have called adp_acknowledge_deal first. `acceptance_spec_hash` must again be the exact full hash -- if it does not match what ADP actually issued, this is treated as TAMPER_DETECTED, not a normal failure. `delivery` must contain the fields the AcceptanceSpec actually requires. When `sourcesRequired` is true, `delivery.sources` must be an array of objects with both `name` and public `url`, for example `[{\"name\":\"NIST AI RMF\",\"url\":\"https://www.nist.gov/itl/ai-risk-management-framework\"}]`; plain-text source strings are invalid. For a deal whose criteria contains `claims`, submit `delivery.claims`: one entry per criterion, in exactly the same order, shaped as {text, sources}. Each sources entry must contain either `text` (a limited evidence excerpt) or an http(s) `url`; optional fields are name, title, date, published_date, and updated_date. Date fields use ISO YYYY-MM-DD for freshness assessment. Legacy deliveries without claim criteria remain unchanged. You do NOT decide whether this passes -- call adp_get_verification next to get ADP's independent result.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "deal_id": {
+            "type": "string",
+            "description": "Preferred input: copy response.dealId exactly."
+          },
+          "dealId": {
+            "type": "string",
+            "description": "Backward-compatible alias for deal_id."
+          },
+          "provider_name": {
+            "type": "string"
+          },
+          "acceptance_spec_hash": {
+            "type": "string"
+          },
+          "delivery": {
+            "type": "object",
+            "description": "For criteria.claims, supply delivery.claims entries in the same order: {text, sources}. Each source needs text or an http(s) URL; name/title/date/published_date/updated_date are optional.",
+            "properties": {
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Required when AcceptanceSpec.criteria.requiredItemCount is present; provide exactly that many entries."
+              },
+              "sources": {
+                "type": "array",
+                "description": "Required when AcceptanceSpec.criteria.sourcesRequired is true. Supply at least minSourceCount objects, each with non-empty name and public http(s) url; plain-text strings are invalid. Example: [{\"name\":\"NIST AI RMF\",\"url\":\"https://www.nist.gov/itl/ai-risk-management-framework\"}]. These are general sources, distinct from claim evidence.",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "name",
+                    "url"
+                  ],
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "url": {
+                      "type": "string",
+                      "format": "uri",
+                      "pattern": "^https?://"
+                    }
+                  }
+                }
+              },
+              "language": {
+                "type": "string"
+              },
+              "claims": {
+                "type": "array",
+                "description": "Required only for criteria.claims; each entry must match its frozen claim in order.",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "text": {
+                      "type": "string",
+                      "description": "Exact frozen claim text."
+                    },
+                    "sources": {
+                      "type": "array",
+                      "minItems": 1,
+                      "description": "Non-empty evidence list; each source needs text or an http(s) URL. URLs must resolve only to public addresses: loopback, private, link-local, metadata, and non-public DNS targets are rejected with UNSAFE_SOURCE_URL.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "format": "uri",
+                            "description": "Optional public http(s) source URL only. Loopback, private, link-local, cloud-metadata, and non-public DNS targets are rejected as UNSAFE_SOURCE_URL."
+                          },
+                          "text": {
+                            "type": "string",
+                            "description": "Limited evidence excerpt."
+                          },
+                          "date": {
+                            "type": "string",
+                            "description": "ISO YYYY-MM-DD relevant source date."
+                          },
+                          "published_date": {
+                            "type": "string",
+                            "description": "ISO YYYY-MM-DD publication date."
+                          },
+                          "updated_date": {
+                            "type": "string",
+                            "description": "ISO YYYY-MM-DD update date."
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "text",
+                    "sources"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "provider_name",
+          "acceptance_spec_hash",
+          "delivery"
+        ],
+        "anyOf": [
+          {
+            "required": [
+              "deal_id"
+            ]
+          },
+          {
+            "required": [
+              "dealId"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "adp_get_verification",
+      "description": "Retrieve ADP's independent verification result for a deal, after a delivery has been submitted; before delivery, DELIVERY_REQUIRED is a tool error. `finalResult` is one of: PASS, PASS_WITH_EVIDENCE_SUPPORTED_CLAIMS (claim evidence supports the claim under the disclosed /3 policy), PASS_WITH_UNVERIFIABLE_CLAIMS (all enforceable criteria were met, but some analytical/judgment content in your delivery could not be objectively proven true -- still a success outcome), FAIL (a required, checkable criterion was not met), INCONCLUSIVE (an explicitly-objective criterion could not be established), or TAMPER_DETECTED (the AcceptanceSpec hash you echoed back did not match what was issued). `settlementStatus` is ELIGIBLE or NOT ELIGIBLE. A valid signature anywhere in this flow proves WHO produced something and that it was not altered -- it never proves a factual or predictive claim inside it is true.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "deal_id": {
+            "type": "string",
+            "description": "Preferred input: copy response.dealId exactly."
+          },
+          "dealId": {
+            "type": "string",
+            "description": "Backward-compatible alias for deal_id."
+          }
+        },
+        "anyOf": [
+          {
+            "required": [
+              "deal_id"
+            ]
+          },
+          {
+            "required": [
+              "dealId"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "adp_submit_verification",
+      "description": "Authenticated external-verifier result submission. The frozen designated verifier signs the standard ADP VerificationResult over the exact dealId, full acceptanceSpecHash and full canonical delivery hash (obtain both through adp_read_deal). Each signed evidenceRefs entry must be {criterionId,status,evidenceHash}, in frozen scope order; status is PASS, FAIL or NOT_VERIFIABLE. evidenceHash is ADP canonical object_hash of the corresponding submitted artifact. Supply evidence [{criterionId,artifact:{...}}] in the same order. Overall signed result is PASS only when every criterion is PASS, otherwise FAIL. Exact retries are idempotent; different valid results lock a conflict. Evidence proves what the trusted signer attests, not an ADP execution of the specialist's work.",
+      "inputSchema": {
+        "type": "object",
+        "required": [
+          "deal_id",
+          "verification_result",
+          "evidence"
+        ],
+        "properties": {
+          "deal_id": {
+            "type": "string"
+          },
+          "verification_result": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "resultVersion",
+              "dealId",
+              "acceptanceSpecHash",
+              "deliveryHash",
+              "verifierId",
+              "result",
+              "evidenceRefs",
+              "timestamp",
+              "nonce",
+              "signature"
+            ],
+            "properties": {
+              "resultVersion": {
+                "type": "string",
+                "enum": [
+                  "adp-verification/0.1"
+                ]
+              },
+              "dealId": {
+                "type": "string"
+              },
+              "acceptanceSpecHash": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "deliveryHash": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "verifierId": {
+                "type": "string"
+              },
+              "result": {
+                "type": "string",
+                "enum": [
+                  "PASS",
+                  "FAIL"
+                ]
+              },
+              "timestamp": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "nonce": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "evidenceRefs": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 10,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "criterionId",
+                    "status",
+                    "evidenceHash"
+                  ],
+                  "properties": {
+                    "criterionId": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "PASS",
+                        "FAIL",
+                        "NOT_VERIFIABLE"
+                      ]
+                    },
+                    "evidenceHash": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{64}$"
+                    }
+                  }
+                }
+              },
+              "signature": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "alg",
+                  "kid",
+                  "sig"
+                ],
+                "properties": {
+                  "alg": {
+                    "type": "string",
+                    "enum": [
+                      "EdDSA"
+                    ]
+                  },
+                  "kid": {
+                    "type": "string"
+                  },
+                  "sig": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9_-]{86}$"
+                  }
+                }
+              }
+            }
+          },
+          "evidence": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 10,
+            "items": {
+              "type": "object",
+              "required": [
+                "criterionId",
+                "artifact"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "criterionId": {
+                  "type": "string"
+                },
+                "artifact": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  ]
+}

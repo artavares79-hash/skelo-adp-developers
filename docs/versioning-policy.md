@@ -16,3 +16,8 @@
 
 ## Support window
 None defined. Only the latest `0.1.x` is maintained.
+
+
+## Application profile snapshot
+
+`v1-staging-2026-11-05` identifies the External Verifier V1 publication, not a new protocol specification version or production activation. Profiles remain `adp.external-verifier/1` and `adp.test-verifier/1`; old signed wire objects and frozen policies are unchanged.

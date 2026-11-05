@@ -26,7 +26,7 @@ Example prompt:
 
 > Connect to the SKELO ADP public sandbox. Using only synthetic data, create a small test deal, read its terms, acknowledge it, submit a matching delivery and retrieve the verification verdict. Explain what each result means.
 
-**Sandbox limits:** isolated, temporary test deals; per-source and global request/deal limits; no customer or production data. Public test deals are automatically cleaned up after approximately 24 hours. External URL retrieval is disabled for public-sandbox verification: source-dependent claims are marked unverifiable (`RETRIEVAL_DISABLED_PUBLIC_SANDBOX`) rather than asserted as checked. A PASS or ELIGIBLE result applies to the actual configured checks; it is not proof of factual accuracy or payment.
+**Sandbox limits:** isolated, temporary test deals; per-source and global request/deal limits; no customer or production data. The current host uses an approximately 24-hour admission-quota window; this is not a promise that signed deal evidence is deleted after 24 hours. External URL retrieval is disabled for public-sandbox verification: source-dependent claims are marked unverifiable (`RETRIEVAL_DISABLED_PUBLIC_SANDBOX`) rather than asserted as checked. A PASS or ELIGIBLE result applies to the actual configured checks; it is not proof of factual accuracy or payment.
 
 Watch anonymized events at the [live activity monitor](https://iamskelo.com/adp/activity). Events are delayed by approximately 60 seconds. The origin label `unclassified` does **not** establish that a visitor is independent or external.
 
@@ -47,4 +47,9 @@ The MCP interface covers ADP's **agreement-to-verification lifecycle**, not mere
 
 ADP does **not** make external systems withhold payment or prove factual truth. Clients and integrating systems remain responsible for agent behavior, credentials (when applicable), content validation, user permissions and downstream actions.
 
-This repository publishes protocol documentation and testing instructions, **not** the private hosted backend or secrets. For more context, see [Getting started](getting-started.md), [examples](examples.md) and [FAQ](faq.md).
+This repository publishes protocol documentation, selected External Verifier V1 application modules and portable contract tests; the private hosted backend and operational secrets are excluded. For more context, see [Getting started](getting-started.md), [examples](examples.md) and [FAQ](faq.md).
+
+
+## External Verifier V1 candidate
+
+An opt-in new-deal profile adds approved verifier public key + mandatory scope on creation and authenticated `adp_submit_verification` with `deal_id`, `verification_result`, `evidence`. These additions are **implemented/tested in staging, not activated on the existing hosted MCP endpoints**. A TEST principal sees only its three permitted review tools and explicitly approved signed synthetic deals. Missing/negative/conflicting reports block release; invalid signatures/bindings are rejected. OAuth scope names alone do not grant permissions. See the [complete contract and status](external-verifier-v1.md), [exact MCP schemas](../schemas/external-verifier-v1-mcp.json) and [operator REST contract](../schemas/external-verifier-v1.openapi.json). No production endpoint is changed by this documentation.

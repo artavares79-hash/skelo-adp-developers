@@ -1,0 +1,542 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "External Verifier V1 staging application API",
+    "version": "v1-staging-2026-11-05",
+    "description": "Published candidate contract, NOT a claim that these features are enabled on hosted production. Operator REST bearer; OAuth clients use protected MCP. No payment execution."
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:8787",
+      "description": "Example loopback STAGING address only; use your explicitly authorized staging URL."
+    }
+  ],
+  "security": [
+    {
+      "OperatorBearer": []
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "OperatorBearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Operator-only REST credential. Never provide this credential to an external or TEST verifier."
+      }
+    },
+    "schemas": {
+      "ExternalVerifier": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "verifierId",
+          "publicKey",
+          "scope"
+        ],
+        "properties": {
+          "verifierId": {
+            "type": "string"
+          },
+          "publicKey": {
+            "type": "string"
+          },
+          "scope": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 10,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "description"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "supersedesDealId": {
+            "type": "string"
+          }
+        },
+        "description": "Authenticated only. Operator-approved Ed25519 verifier and mandatory professional scope frozen into the signed agreement. Put professional criteria here, not only in request text. No automatic settlement until all mandatory external criteria and structural checks PASS. A re-review requires a new acknowledged linked deal with changed delivery."
+      },
+      "VerificationResult": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "resultVersion",
+          "dealId",
+          "acceptanceSpecHash",
+          "deliveryHash",
+          "verifierId",
+          "result",
+          "evidenceRefs",
+          "timestamp",
+          "nonce",
+          "signature"
+        ],
+        "properties": {
+          "resultVersion": {
+            "type": "string",
+            "enum": [
+              "adp-verification/0.1"
+            ]
+          },
+          "dealId": {
+            "type": "string"
+          },
+          "acceptanceSpecHash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "deliveryHash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "verifierId": {
+            "type": "string"
+          },
+          "result": {
+            "type": "string",
+            "enum": [
+              "PASS",
+              "FAIL"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "nonce": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "evidenceRefs": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 10,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "criterionId",
+                "status",
+                "evidenceHash"
+              ],
+              "properties": {
+                "criterionId": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "PASS",
+                    "FAIL",
+                    "NOT_VERIFIABLE"
+                  ]
+                },
+                "evidenceHash": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              }
+            }
+          },
+          "signature": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "alg",
+              "kid",
+              "sig"
+            ],
+            "properties": {
+              "alg": {
+                "type": "string",
+                "enum": [
+                  "EdDSA"
+                ]
+              },
+              "kid": {
+                "type": "string"
+              },
+              "sig": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{86}$"
+              }
+            }
+          }
+        }
+      },
+      "Evidence": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 10,
+        "items": {
+          "type": "object",
+          "required": [
+            "criterionId",
+            "artifact"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "criterionId": {
+              "type": "string"
+            },
+            "artifact": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/api/playground/external/deals": {
+      "post": {
+        "summary": "Create new opt-in external-verifier agreement",
+        "responses": {
+          "200": {
+            "description": "Inspect application result; HTTP 200 alone never means PASS or eligible."
+          },
+          "400": {
+            "description": "Malformed delivery/verification or invalid signature/binding/evidence."
+          },
+          "401": {
+            "description": "Missing/invalid operator authentication."
+          },
+          "403": {
+            "description": "Permission denied, TEST token on direct REST, revoked verifier, or TEST profile missing."
+          },
+          "409": {
+            "description": "Missing delivery/ACK, expired agreement, nonce replay or locked review."
+          },
+          "413": {
+            "description": "Existing request size limit exceeded."
+          },
+          "503": {
+            "description": "External profile creation disabled or service not provisioned."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "criteria",
+                  "externalVerifier"
+                ],
+                "properties": {
+                  "criteria": {
+                    "type": "object"
+                  },
+                  "externalVerifier": {
+                    "$ref": "#/components/schemas/ExternalVerifier"
+                  },
+                  "syntheticTest": {
+                    "type": "boolean",
+                    "description": "Operator-only creation flag; signed server marker plus a separate server policy approval are required for TEST access."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/playground/external/deals/{deal_id}": {
+      "parameters": [
+        {
+          "name": "deal_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Read signed agreement, policy, canonical delivery and full hashes",
+        "responses": {
+          "200": {
+            "description": "Inspect application result; HTTP 200 alone never means PASS or eligible."
+          },
+          "400": {
+            "description": "Malformed delivery/verification or invalid signature/binding/evidence."
+          },
+          "401": {
+            "description": "Missing/invalid operator authentication."
+          },
+          "403": {
+            "description": "Permission denied, TEST token on direct REST, revoked verifier, or TEST profile missing."
+          },
+          "409": {
+            "description": "Missing delivery/ACK, expired agreement, nonce replay or locked review."
+          },
+          "413": {
+            "description": "Existing request size limit exceeded."
+          },
+          "503": {
+            "description": "External profile creation disabled or service not provisioned."
+          }
+        }
+      }
+    },
+    "/api/playground/external/deals/{deal_id}/ack": {
+      "parameters": [
+        {
+          "name": "deal_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "post": {
+        "summary": "Acknowledge the exact spec and policy",
+        "responses": {
+          "200": {
+            "description": "Inspect application result; HTTP 200 alone never means PASS or eligible."
+          },
+          "400": {
+            "description": "Malformed delivery/verification or invalid signature/binding/evidence."
+          },
+          "401": {
+            "description": "Missing/invalid operator authentication."
+          },
+          "403": {
+            "description": "Permission denied, TEST token on direct REST, revoked verifier, or TEST profile missing."
+          },
+          "409": {
+            "description": "Missing delivery/ACK, expired agreement, nonce replay or locked review."
+          },
+          "413": {
+            "description": "Existing request size limit exceeded."
+          },
+          "503": {
+            "description": "External profile creation disabled or service not provisioned."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "party",
+                  "accepted",
+                  "acceptanceSpecHash",
+                  "verificationSettlementPolicyHash"
+                ],
+                "properties": {
+                  "party": {
+                    "type": "string",
+                    "enum": [
+                      "provider"
+                    ]
+                  },
+                  "accepted": {
+                    "type": "boolean",
+                    "const": true
+                  },
+                  "acceptanceSpecHash": {
+                    "type": "string"
+                  },
+                  "verificationSettlementPolicyHash": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/playground/external/deals/{deal_id}/delivery": {
+      "parameters": [
+        {
+          "name": "deal_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "post": {
+        "summary": "Submit the immutable first delivery",
+        "responses": {
+          "200": {
+            "description": "Inspect application result; HTTP 200 alone never means PASS or eligible."
+          },
+          "400": {
+            "description": "Malformed delivery/verification or invalid signature/binding/evidence."
+          },
+          "401": {
+            "description": "Missing/invalid operator authentication."
+          },
+          "403": {
+            "description": "Permission denied, TEST token on direct REST, revoked verifier, or TEST profile missing."
+          },
+          "409": {
+            "description": "Missing delivery/ACK, expired agreement, nonce replay or locked review."
+          },
+          "413": {
+            "description": "Existing request size limit exceeded."
+          },
+          "503": {
+            "description": "External profile creation disabled or service not provisioned."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "acceptanceSpecHash"
+                ],
+                "properties": {
+                  "acceptanceSpecHash": {
+                    "type": "string"
+                  },
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "sources": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "name",
+                        "url"
+                      ],
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "url": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "sections": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/playground/external/deals/{deal_id}/verification": {
+      "parameters": [
+        {
+          "name": "deal_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Read current combined release decision and signed gate receipt",
+        "responses": {
+          "200": {
+            "description": "Inspect application result; HTTP 200 alone never means PASS or eligible."
+          },
+          "400": {
+            "description": "Malformed delivery/verification or invalid signature/binding/evidence."
+          },
+          "401": {
+            "description": "Missing/invalid operator authentication."
+          },
+          "403": {
+            "description": "Permission denied, TEST token on direct REST, revoked verifier, or TEST profile missing."
+          },
+          "409": {
+            "description": "Missing delivery/ACK, expired agreement, nonce replay or locked review."
+          },
+          "413": {
+            "description": "Existing request size limit exceeded."
+          },
+          "503": {
+            "description": "External profile creation disabled or service not provisioned."
+          }
+        }
+      },
+      "post": {
+        "summary": "Submit a signed external result",
+        "responses": {
+          "200": {
+            "description": "Inspect application result; HTTP 200 alone never means PASS or eligible."
+          },
+          "400": {
+            "description": "Malformed delivery/verification or invalid signature/binding/evidence."
+          },
+          "401": {
+            "description": "Missing/invalid operator authentication."
+          },
+          "403": {
+            "description": "Permission denied, TEST token on direct REST, revoked verifier, or TEST profile missing."
+          },
+          "409": {
+            "description": "Missing delivery/ACK, expired agreement, nonce replay or locked review."
+          },
+          "413": {
+            "description": "Existing request size limit exceeded."
+          },
+          "503": {
+            "description": "External profile creation disabled or service not provisioned."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "verificationResult",
+                  "evidence"
+                ],
+                "properties": {
+                  "verificationResult": {
+                    "$ref": "#/components/schemas/VerificationResult"
+                  },
+                  "evidence": {
+                    "$ref": "#/components/schemas/Evidence"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
